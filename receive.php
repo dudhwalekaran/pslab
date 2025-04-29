@@ -3,14 +3,14 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json");
 
-// Log incoming data for debugging
 file_put_contents('debug.log', file_get_contents("php://input") . "\n", FILE_APPEND);
 
 $raw = file_get_contents("php://input");
 $data = json_decode($raw, true);
 
+file_put_contents('debug.log', "Parsed data: " . print_r($data, true) . "\n", FILE_APPEND);
+
 if (isset($data['data']) && is_array($data['data']) && !empty($data['data'])) {
-    // Connect to MariaDB
     $conn = new mysqli("localhost", "pslab_user", "pslab123", "pslab");
     if ($conn->connect_error) {
         file_put_contents('debug.log', "Connection failed: " . $conn->connect_error . "\n", FILE_APPEND);
@@ -19,7 +19,6 @@ if (isset($data['data']) && is_array($data['data']) && !empty($data['data'])) {
         exit;
     }
 
-    // Prepare the SQL statement
     $stmt = $conn->prepare("INSERT INTO project (date, title, description) VALUES (?, ?, ?)");
     if (!$stmt) {
         file_put_contents('debug.log', "Prepare failed: " . $conn->error . "\n", FILE_APPEND);
@@ -29,13 +28,12 @@ if (isset($data['data']) && is_array($data['data']) && !empty($data['data'])) {
         exit;
     }
 
-    // Bind and execute for each row
     foreach ($data['data'] as $row) {
         if (count($row) >= 3) {
             $date = $row[0];
             $title = $row[1];
             $description = $row[2];
-            
+
             $stmt->bind_param("sss", $date, $title, $description);
             if (!$stmt->execute()) {
                 file_put_contents('debug.log', "Execute failed: " . $stmt->error . "\n", FILE_APPEND);

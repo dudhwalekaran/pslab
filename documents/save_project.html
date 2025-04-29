@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Document to PSLAB</title>
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Add Document to PSLAB Database</h2>
+
+        <!-- Message container -->
+        <div id="message" class="hidden mb-4 p-4 rounded"></div>
+
+        <form id="documentForm" class="space-y-4">
+            <div>
+                <label for="docType" class="block text-sm font-medium text-gray-700">Document Type:</label>
+                <select id="docType" name="docType" required 
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="" disabled selected>Select a type</option>
+                    <option value="news">News</option>
+                    <option value="achievement">Achievement</option>
+                    <option value="project">Project</option>
+                    <option value="article">Article</option>
+                    <option value="thesis">Thesis</option>
+                    <option value="paper">Paper</option>
+                </select>
+            </div>
+
+            <!-- Common fields -->
+            <div id="dateTimeField">
+                <label id="dateTimeLabel" for="dateTime" class="block text-sm font-medium text-gray-700">Date:</label>
+                <input type="datetime-local" id="dateTime" name="dateTime" required 
+                       class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
+                <input type="text" id="title" name="title" required 
+                       class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div id="descriptionField">
+                <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
+                <textarea id="description" name="description" rows="5" 
+                          class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+            </div>
+
+            <!-- News-specific fields -->
+            <div id="newsFields" class="hidden space-y-4">
+                <div>
+                    <label for="image_url" class="block text-sm font-medium text-gray-700">Image URL:</label>
+                    <input type="url" id="image_url" name="image_url" 
+                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="speaker" class="block text-sm font-medium text-gray-700">Speaker:</label>
+                    <input type="text" id="speaker" name="speaker" 
+                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+            </div>
+
+            <!-- Article/Thesis/Paper-specific fields -->
+            <div id="authorLinkFields" class="hidden space-y-4">
+                <div>
+                    <label for="author" class="block text-sm font-medium text-gray-700">Author:</label>
+                    <input type="text" id="author" name="author" 
+                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="link" class="block text-sm font-medium text-gray-700">Link:</label>
+                    <input type="url" id="link" name="link" 
+                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                Submit
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Show/hide fields based on document type
+        document.getElementById('docType').addEventListener('change', function() {
+            const docType = this.value;
+            const newsFields = document.getElementById('newsFields');
+            const authorLinkFields = document.getElementById('authorLinkFields');
+            const descriptionField = document.getElementById('descriptionField');
+            const descriptionInput = document.getElementById('description');
+            const dateTimeLabel = document.getElementById('dateTimeLabel');
+            const dateTimeField = document.getElementById('dateTimeField');
+
+            // Reset visibility
+            newsFields.classList.add('hidden');
+            authorLinkFields.classList.add('hidden');
+            descriptionField.classList.remove('hidden');
+            descriptionInput.required = true;
+
+            // Adjust Date/Time label and field visibility
+            if (['article', 'thesis', 'paper'].includes(docType)) {
+                dateTimeLabel.textContent = 'Time:';
+            } else {
+                dateTimeLabel.textContent = 'Date:';
+            }
+
+            // Show fields based on docType
+            if (docType === 'news') {
+                newsFields.classList.remove('hidden');
+            } else if (['article', 'thesis', 'paper'].includes(docType)) {
+                authorLinkFields.classList.remove('hidden');
+                if (docType === 'article') {
+                    descriptionField.classList.add('hidden');
+                    descriptionInput.required = false;
+                }
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('documentForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const messageDiv = document.getElementById('message');
+            const form = event.target;
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/pslab_static/documents/save_project.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                messageDiv.classList.remove('hidden');
+                if (result.status === 'success') {
+                    messageDiv.classList.remove('bg-red-100', 'text-red-700');
+                    messageDiv.classList.add('bg-green-100', 'text-green-700');
+                    messageDiv.textContent = result.message;
+
+                    // Clear the form
+                    form.reset();
+                    document.getElementById('newsFields').classList.add('hidden');
+                    document.getElementById('authorLinkFields').classList.add('hidden');
+                    document.getElementById('descriptionField').classList.remove('hidden');
+                    document.getElementById('description').required = true;
+                    document.getElementById('dateTimeLabel').textContent = 'Date:';
+                } else {
+                    messageDiv.classList.remove('bg-green-100', 'text-green-700');
+                    messageDiv.classList.add('bg-red-100', 'text-red-700');
+                    messageDiv.textContent = result.message;
+                }
+
+                // Hide message after 3 seconds
+                setTimeout(() => {
+                    messageDiv.classList.add('hidden');
+                }, 3000);
+            } catch (error) {
+                messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+                messageDiv.classList.add('bg-red-100', 'text-red-700');
+                messageDiv.textContent = 'Error: Unable to connect to the server. ' + error.message;
+                setTimeout(() => {
+                    messageDiv.classList.add('hidden');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
