@@ -1,0 +1,307 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - IITB Power System Lab</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Sidebar transition */
+      .sidebar {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      }
+      .sidebar-hidden {
+        transform: translateX(-100%);
+      }
+      .sidebar-overlay {
+        transition: opacity 0.3s ease-in-out;
+      }
+      .sidebar-overlay-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+      <div
+        class="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <!-- Left Section: Sidebar Toggle (Desktop) and Mobile Menu Button -->
+        <div class="flex items-center space-x-4">
+          <!-- Sidebar Toggle Button (Desktop Only) -->
+          <button
+            id="sidebar-toggle"
+            class="text-white text-2xl focus:outline-none hidden md:block"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <!-- Mobile Menu Button (Mobile Only) -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden text-white focus:outline-none"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+          <!-- Title -->
+          <h1 class="text-xl font-bold tracking-tight">
+            IITB Power System Lab
+          </h1>
+        </div>
+
+        <!-- Navigation Links (Desktop Only) -->
+        <ul class="hidden md:flex space-x-6">
+          <li>
+            <a
+              href="dashboard.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="equipments.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Equipment</a
+            >
+          </li>
+          <li>
+            <a
+              href="lab-resources.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Lab Resources</a
+            >
+          </li>
+          <li>
+            <a
+              href="documents.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Documents</a
+            >
+          </li>
+        </ul>
+
+        <!-- IITB Logo -->
+        <div
+          class="transform hover:scale-105 transition-transform duration-300"
+        >
+          <img src="../public/iitb.png" alt="IITB Logo" class="h-12" />
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+        <ul class="flex flex-col space-y-4 p-4">
+          <li><a href="dashboard.html" class="block py-2">Home</a></li>
+          <li><a href="equipments.html" class="block py-2">Equipment</a></li>
+          <li>
+            <a href="lab-resources.html" class="block py-2">Lab Resources</a>
+          </li>
+          <li><a href="documents.html" class="block py-2">Documents</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div
+      id="sidebar-overlay"
+      class="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 sidebar-overlay sidebar-overlay-hidden md:block hidden"
+    >
+      <div
+        id="sidebar"
+        class="w-52 bg-gray-900 text-white fixed top-0 left-0 h-full p-6 sidebar sidebar-hidden md:block hidden"
+      >
+        <!-- Close Button -->
+        <div class="flex justify-end">
+          <button
+            id="sidebar-close"
+            class="text-white text-3xl focus:outline-none"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <!-- Sidebar Links -->
+        <div class="flex flex-col space-y-4 mt-6">
+          <a
+            href="meeting.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-video mr-2"></i> Jitsi Meeting
+          </a>
+          <a
+            href="upmath.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-square-root-alt mr-2"></i> Upmath
+          </a>
+          <a
+            href="excalidraw.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-draw-polygon mr-2"></i> Excalidraw
+          </a>
+          <a
+            href="login-request.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-user-plus mr-2"></i> Login Requests
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <!-- Quick Links Section -->
+      <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800"
+          >
+            Quick Links
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Equipment Management Box -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div class="flex items-center space-x-4 mb-4">
+                <div
+                  class="w-12 h-12 bg-green-500 text-white flex items-center justify-center rounded-full"
+                >
+                  <i class="fas fa-tools text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Manage Equipment
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-4">
+                Reserve equipment for experiments and track lab resources
+                effectively.
+              </p>
+              <a
+                href="equipments.html"
+                class="text-indigo-600 hover:text-indigo-800 transition-colors duration-300"
+              >
+                Go to Equipment
+              </a>
+            </div>
+            <!-- File Upload Box -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div class="flex items-center space-x-4 mb-4">
+                <div
+                  class="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-full"
+                >
+                  <i class="fas fa-code text-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Code File Upload
+                </h3>
+              </div>
+              <p class="text-gray-700 mb-4">
+                Upload and manage your code files, scripts, and Documents for
+                easy sharing.
+              </p>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdD6yPiYajXQOJAqqQOsQAw1AfE6XlhLMB1afqo6NN3qFO_jQ/viewform?usp=dialog"
+                target="_blank"
+                class="text-indigo-600 hover:text-indigo-800 transition-colors duration-300"
+              >
+                Go to Upload
+              </a>
+            </div>
+            <!-- Resources Sharing box -->
+            <div
+            class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          >
+            <div class="flex items-center space-x-4 mb-4">
+              <div
+                class="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-full"
+              >
+                <i class="fas fa-code text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900">
+                Code File Upload
+              </h3>
+            </div>
+            <p class="text-gray-700 mb-4">
+              Upload and manage your Thesis, Research papers, and Projects, Articles for
+              easy sharing.
+            </p>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdbVqnWmi4RTeFlW-BtTeHa3OYQCTmm6nO0SfejELCrymFBbA/viewform?usp=header"
+              target="_blank"
+              class="text-indigo-600 hover:text-indigo-800 transition-colors duration-300"
+            >
+              Go to Upload
+            </a>
+          </div>
+          </div>
+        </div>
+      </section>
+      <!-- Logout Button -->
+      <div class="flex justify-center items-center py-12">
+        <a href="/pslab/index.html">
+          <button
+            id="logout-button"
+            class="rounded-lg p-3 bg-red-600 text-white font-semibold px-10 hover:bg-red-700 transition-colors duration-300"
+          >
+            Log Out
+          </button>
+        </a>
+      </div>
+    </main>
+    <script src="./script.js"></script>
+    <script>
+      const sidebarToggle = document.getElementById("sidebar-toggle");
+      const sidebarClose = document.getElementById("sidebar-close");
+      const sidebar = document.getElementById("sidebar");
+      const sidebarOverlay = document.getElementById("sidebar-overlay");
+
+      function toggleSidebar() {
+        if (sidebar.classList.contains("sidebar-hidden")) {
+          sidebar.classList.remove("sidebar-hidden");
+          sidebarOverlay.classList.remove("sidebar-overlay-hidden");
+        } else {
+          sidebar.classList.add("sidebar-hidden");
+          sidebarOverlay.classList.add("sidebar-overlay-hidden");
+        }
+      }
+
+      sidebarToggle.addEventListener("click", toggleSidebar);
+      sidebarClose.addEventListener("click", toggleSidebar);
+      sidebarOverlay.addEventListener("click", toggleSidebar);
+
+      window.addEventListener("scroll", () => {
+        sidebar.classList.add("sidebar-hidden");
+        sidebarOverlay.classList.add("sidebar-overlay-hidden");
+      });
+
+      // Add logout functionality
+      document.getElementById("logout-button").addEventListener("click", () => {
+        // Session management should be handled server-side
+        window.location.href = "/pslab_static/login.html";
+      });
+    </script>
+  </body>
+</html>

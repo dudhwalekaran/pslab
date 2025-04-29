@@ -1,0 +1,26 @@
+function onFormSubmit(e) {
+  var response = e.response;
+  var itemResponses = response.getItemResponses();
+  var docType = itemResponses[0].getResponse(); // First question is Select Document
+  var spreadsheet = SpreadsheetApp.openById("1xZ28kAaGCgl89v15ooicu7nOd7PUWXeiYwLfyOdT1AA");
+  
+  var sheetName = docType.charAt(0).toUpperCase() + docType.slice(1).toLowerCase();
+  if (sheetName === "News") {
+    var sheet = spreadsheet.getSheetByName("Sheet1") || spreadsheet.getSheetByName("News") || spreadsheet.insertSheet("News");
+  } else {
+    var sheet = spreadsheet.getSheetByName(sheetName) || spreadsheet.insertSheet(sheetName);
+  }
+  
+  var data = [response.getTimestamp()];
+  for (var i = 1; i < itemResponses.length; i++) {
+    var responseValue = itemResponses[i].getResponse();
+    if (itemResponses[i].getItem().getType() === "FILE_UPLOAD") {
+      var file = DriveApp.getFileById(responseValue[0].getId());
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      data.push(file.getUrl()); // Store public URL instead of file ID
+    } else {
+      data.push(responseValue);
+    }
+  }
+  sheet.appendRow(data);
+}

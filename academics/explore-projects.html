@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Projects - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold tracking-tight">IITB Power System Lab</h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 px-6">
+                    <li><a href="../index.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Home</a></li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Academics/Research</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Academics & Research</li>
+                            <li><a href="/pslab/academics/subjects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Subjects</a></li>
+                            <li><a href="/pslab/academics/research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Research</a></li>
+                            <li><a href="/pslab/academics/current-research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Current Research</a></li>
+                            <li><a href="/pslab/academics/explore-projects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Explore Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Laboratory Facilities</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Facilities</li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Power Systems Lab</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Resources</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Resources</li>
+                            <li><a href="/pslab/resources/library.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Library</a></li>
+                            <li><a href="/pslab/resources/software.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Software</a></li>
+                            <li><a href="/pslab/resources/educational-videos.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Videos</a></li>
+                            <li><a href="https://mkdocs-three.vercel.app/" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Content</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">People</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Our Team</li>
+                            <li><a href="/pslab/peoples/faculty.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Faculty</a></li>
+                            <li><a href="/pslab/peoples/students.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Students</a></li>
+                            <li><a href="/pslab/peoples/alumni.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Alumni</a></li>
+                            <li><a href="/pslab/peoples/staff.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Staff</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="../news.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">News</a>
+                    </li>
+                    <li><a href="../login.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Login</a></li>
+                </ul>
+            </nav>
+
+            <!-- IITB Logo -->
+            <div class="transform hover:scale-105 transition-transform duration-300 ml-4">
+                <img src="../public/iitb.png" alt="IITB Logo" class="h-12">
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+            <ul class="flex flex-col space-y-4 p-4">
+                <li><a href="../index.html" class="block py-2">Home</a></li>
+                <li>
+                    <a href="#" class="block py-2">Academics/Research</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Academics & Research</li>
+                        <li><a href="/pslab/academics/subjects.html" class="block py-1">Subjects</a></li>
+                        <li><a href="/pslab/academics/research.html" class="block py-1">Research</a></li>
+                        <li><a href="/pslab/academics/current-research.html" class="block py-1">Current Research</a></li>
+                        <li><a href="/pslab/academics/explore-projects.html" class="block py-1">Explore Projects</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Laboratory Facilities</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Facilities</li>
+                        <li><a href="#" class="block py-1">Power Systems Lab</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Resources</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Resources</li>
+                        <li><a href="/pslab/resources/library.html" class="block py-1">Library</a></li>
+                        <li><a href="/pslab/resources/software.html" class="block py-1">Software</a></li>
+                        <li><a href="/pslab/resources/educational-videos.html" class="block py-1">Educational Videos</a></li>
+                        <li><a href="https://mkdocs-three.vercel.app/" class="block py-1">Educational Content</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">People</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Our Team</li>
+                        <li><a href="/pslab/peoples/faculty.html" class="block py-1">Faculty</a></li>
+                        <li><a href="/pslab/peoples/students.html" class="block py-1">Students</a></li>
+                        <li><a href="/pslab/peoples/alumni.html" class="block py-1">Alumni</a></li>
+                        <li><a href="/pslab/peoples/staff.html" class="block py-1">Staff</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../news.html" class="block py-2">News</a>
+                </li>
+                <li><a href="../login.html" class="block py-2">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Projects Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl font-extrabold text-center mb-12 text-gray-800">Projects</h1>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <!-- Project 1: Dynamic Voltage Restorer -->
+                    <div class="bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                        <div class="relative">
+                            <img src="../public/images/dvr.avif" alt="Dynamic Voltage Restorer" class="w-full h-56 sm:h-64 object-cover rounded-t-lg">
+                            <div class="absolute inset-0 bg-black opacity-25 rounded-t-lg"></div>
+                        </div>
+                        <div class="p-6">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-bolt text-indigo-600 mr-2"></i> Dynamic Voltage Restorer
+                            </h2>
+                            <p class="text-gray-600 text-base mb-4">
+                                Voltage sags within power distribution systems are typically observed to occur due to a significant drop in the voltage level of only one phase. The faculties at Power electronics and Power system in IIT Bombay in collaboration with TATA Power developed a novel super-capacitor based transformerless Dynamic Voltage Restorer (DVR) with a Reconfigurable Thyristor Network (RTN), which can be used for compensating the phase with the largest voltage sag. Usage of the RTN in this approach overcomes the need for dedicated power conditioning units for each of the three phases, thereby eliminating redundant switching, magnetic and energy storage elements and other auxiliary components. This reduces system weight, size and cost. A laboratory prototype has been built and the response of the controller tested on a real-time digital simulator for proof-of-concept.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Electric Traction Power Supply System (eTPSS) -->
+                    <div class="bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                        <div class="relative">
+                            <img src="../public/images/etpss.jpg" alt="Electric Traction Power Supply System" class="w-full h-56 sm:h-64 object-cover rounded-t-lg">
+                            <div class="absolute inset-0 bg-black opacity-25 rounded-t-lg"></div>
+                        </div>
+                        <div class="p-6">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-train text-indigo-600 mr-2"></i> Electric Traction Power Supply System (eTPSS)
+                            </h2>
+                            <p class="text-gray-600 text-base mb-4">
+                                The planning and design of a traction power supply system requires extensive simulation studies to be carried out by the utilities and the railways. The recent developments in various metro projects and the introduction of High speed railway in India has created a necessity and an opportunity to develop an indigenous, flexible and an integrated simulation software. Indian Institute of Science (IISc Bangalore), Indian Institute of Technology, Bombay (IITB).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Miniature Model of Full Spectrum Simulator (FSS MINI) -->
+                    <div class="bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                        <div class="relative">
+                            <img src="../public/images/fssmini.jpg" alt="Miniature Model of Full Spectrum Simulator" class="w-full h-56 sm:h-64 object-cover rounded-t-lg">
+                            <div class="absolute inset-0 bg-black opacity-25 rounded-t-lg"></div>
+                        </div>
+                        <div class="p-6">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-microchip text-indigo-600 mr-2"></i> Miniature Model of Full Spectrum Simulator (FSS MINI)
+                            </h2>
+                            <p class="text-gray-600 text-base mb-4">
+                                An indigenously developed system that provides both off-line and real-time simulation capabilities at an affordable cost, easily configurable for custom applications. A Miniature version is configured as an educational package and small system simulation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-8 shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-4">IITB Power System Lab</h3>
+                    <p class="text-sm text-gray-300">Advancing the future of power systems through innovation and research.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p class="text-sm text-gray-300">Department of Electrical Engineering</p>
+                    <p class="text-sm text-gray-300">IIT Bombay, Powai</p>
+                    <p class="text-sm text-gray-300">Mumbai 400076, India</p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-envelope mr-2"></i>Email: powersys@iitb.ac.in
+                    </p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-phone mr-2"></i>Phone: +91 22 2159 3505
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="/pslab/index.html" class="hover:text-indigo-300 transition-colors duration-300">Home</a></li>
+                        <li><a href="/pslab/academics/research.html" class="hover:text-indigo-300 transition-colors duration-300">Research</a></li>
+                        <li><a href="/pslab/peoples/faculty.html" class="hover:text-indigo-300 transition-colors duration-300">People</a></li>
+                        <li><a href="/pslab/news.html" class="hover:text-indigo-300 transition-colors duration-300">News</a></li>
+                        <li><a href="/pslab/contact-us.html" class="hover:text-indigo-300 transition-colors duration-300">Contact Us</a></li>
+                        <li><a href="https://voltvault-roan.vercel.app/" class="hover:text-indigo-300 transition-colors duration-300">Voltvault</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@pslab_iitb" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-400 border-t border-indigo-700 pt-4">
+                © 2025 IITB Power System Lab. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Fetch Project Data from Google Spreadsheet and append to the grid
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('research_proxy.php?type=Project', {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const projectGrid = document.querySelector('.grid');
+                if (projectGrid && Array.isArray(data)) {
+                    data.forEach(item => {
+                        const projectItem = document.createElement('div');
+                        projectItem.className = 'bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105';
+                        projectItem.innerHTML = `
+                            <div class="relative">
+                                <img src="${item.image || '../public/images/default.jpg'}" alt="${item.title || 'Project'}" class="w-full h-56 sm:h-64 object-cover rounded-t-lg">
+                                <div class="absolute inset-0 bg-black opacity-25 rounded-t-lg"></div>
+                            </div>
+                            <div class="p-6">
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
+                                    <i class="fas fa-lightbulb text-indigo-600 mr-2"></i> ${item.title || 'Untitled Project'}
+                                </h2>
+                                <p class="text-gray-600 text-base mb-4">${item.description || 'No description available'}</p>
+                            </div>
+                        `;
+                        projectGrid.appendChild(projectItem);
+                    });
+                } else {
+                    console.error('Project grid or data is invalid:', data);
+                }
+            })
+            .catch(error => console.error('Error fetching projects:', error));
+        });
+    </script>
+</body>
+</html>

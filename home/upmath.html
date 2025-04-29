@@ -1,0 +1,25 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upmath Tool</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen">
+  <div class="h-full w-full">
+    <iframe 
+      src="https://upmath.me" 
+      class="w-full h-full border-none" 
+      title="Upmath Tool">
+    </iframe>
+  </div>
+</body>
+</html>

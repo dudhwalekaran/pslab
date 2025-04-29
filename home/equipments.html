@@ -1,0 +1,947 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equipment Management - IITB Power System Lab</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      }
+      .sidebar-hidden {
+        transform: translateX(-100%);
+      }
+      .sidebar-overlay {
+        transition: opacity 0.3s ease-in-out;
+      }
+      .sidebar-overlay-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .message {
+        animation: fadeInOut 2s ease-in-out;
+      }
+      .modal {
+        transition: opacity 0.3s ease-in-out;
+      }
+      .modal-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      @keyframes fadeInOut {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        20% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        80% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+      <div
+        class="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <!-- Left Section: Sidebar Toggle (Desktop) and Mobile Menu Button -->
+        <div class="flex items-center space-x-4">
+          <!-- Sidebar Toggle Button (Desktop Only) -->
+          <button
+            id="sidebar-toggle"
+            class="text-white text-2xl focus:outline-none hidden md:block"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <!-- Mobile Menu Button (Mobile Only) -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden text-white focus:outline-none"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+          <!-- Title -->
+          <h1 class="text-xl font-bold tracking-tight">
+            IITB Power System Lab
+          </h1>
+        </div>
+
+        <!-- Navigation Links (Desktop Only) -->
+        <ul class="hidden md:flex space-x-6">
+          <li>
+            <a
+              href="dashboard.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="equipments.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Equipment</a
+            >
+          </li>
+          <li>
+            <a
+              href="lab-resources.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Lab Resources</a
+            >
+          </li>
+          <li>
+            <a
+              href="documents.html"
+              class="hover:text-gray-300 transition-colors duration-300"
+              >Documents</a
+            >
+          </li>
+        </ul>
+
+        <!-- IITB Logo -->
+        <div
+          class="transform hover:scale-105 transition-transform duration-300"
+        >
+          <img src="../public/iitb.png" alt="IITB Logo" class="h-12" />
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+        <ul class="flex flex-col space-y-4 p-4">
+          <li><a href="dashboard.html" class="block py-2">Home</a></li>
+          <li><a href="equipments.html" class="block py-2">Equipment</a></li>
+          <li><a href="lab-resources.html" class="block py-2">Lab Resources</a></li>
+          <li><a href="documents.html" class="block py-2">Documents</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div
+      id="sidebar-overlay"
+      class="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 sidebar-overlay sidebar-overlay-hidden md:block hidden"
+    >
+      <div
+        id="sidebar"
+        class="w-52 bg-gray-900 text-white fixed top-0 left-0 h-full p-6 sidebar sidebar-hidden md:block hidden"
+      >
+        <div class="flex justify-end">
+          <button
+            id="sidebar-close"
+            class="text-white text-3xl focus:outline-none"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="flex flex-col space-y-4 mt-6">
+          <a
+            href="meeting.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-video mr-2"></i> Jitsi Meeting
+          </a>
+          <a
+            href="upmath.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-square-root-alt mr-2"></i> Upmath
+          </a>
+          <a
+            href="excalidraw.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-draw-polygon mr-2"></i> Excalidraw
+          </a>
+          <a
+            href="login-request.html"
+            class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center"
+          >
+            <i class="fas fa-user-plus mr-2"></i> Login Requests
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800"
+          >
+            Equipment Management
+          </h2>
+
+          <!-- Tabs -->
+          <div class="flex flex-wrap justify-center mb-8 gap-2">
+            <button
+              id="add-equipment-tab"
+              class="px-4 py-2 mx-2 bg-indigo-600 text-white rounded-lg focus:outline-none w-full sm:w-auto"
+            >
+              Add New Equipment
+            </button>
+            <button
+              id="equipments-tab"
+              class="px-4 py-2 mx-2 bg-gray-300 text-gray-800 rounded-lg focus:outline-none w-full sm:w-auto"
+            >
+              Equipments
+            </button>
+            <button
+              id="reserved-tab"
+              class="px-4 py-2 mx-2 bg-gray-300 text-gray-800 rounded-lg focus:outline-none w-full sm:w-auto"
+            >
+              Reserved Equipments
+            </button>
+          </div>
+
+          <!-- Add New Equipment -->
+          <div
+            id="add-equipment-section"
+            class="bg-white p-6 rounded-lg shadow-md mb-8 max-w-lg mx-auto hidden"
+          >
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Add New Equipment
+            </h3>
+            <form id="add-equipment-form" class="space-y-4">
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                  <i class="fas fa-tools text-indigo-600"></i>
+                </span>
+                <input
+                  type="text"
+                  id="new-equipment-name"
+                  placeholder="Equipment Name"
+                  class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                  <i class="fas fa-hashtag text-indigo-600"></i>
+                </span>
+                <input
+                  type="number"
+                  id="total-quantity"
+                  placeholder="Total Quantity"
+                  min="0"
+                  class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                id="add-equipment-button"
+                class="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700"
+              >
+                Add Equipment
+              </button>
+              <p
+                id="add-error"
+                class="text-red-500 text-center mt-2 hidden"
+              ></p>
+              <p
+                id="add-success"
+                class="text-green-500 text-center mt-2 hidden message"
+              ></p>
+            </form>
+          </div>
+
+          <!-- Equipments List -->
+          <div
+            id="equipments-section"
+            class="bg-white p-6 rounded-lg shadow-md mb-8 overflow-x-auto"
+          >
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Available Equipments
+            </h3>
+            <table class="min-w-full table-auto">
+              <thead>
+                <tr class="bg-gray-200">
+                  <th class="px-4 py-2 text-left">Equipment Name</th>
+                  <th class="px-4 py-2 text-left">Total</th>
+                  <th class="px-4 py-2 text-left">Available</th>
+                  <th class="px-4 py-2 text-left">Action</th>
+                </tr>
+              </thead>
+              <tbody id="equipment-table"></tbody>
+            </table>
+          </div>
+
+          <!-- Reserved Equipments -->
+          <div
+            id="reserved-section"
+            class="bg-white p-6 rounded-lg shadow-md mb-8 hidden overflow-x-auto"
+          >
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Reserved Equipments
+            </h3>
+            <table class="min-w-full table-auto">
+              <thead>
+                <tr class="bg-gray-200">
+                  <th class="px-4 py-2 text-left">Equipment Name</th>
+                  <th class="px-4 py-2 text-left">User</th>
+                  <th class="px-4 py-2 text-left">From Date</th>
+                  <th class="px-4 py-2 text-left">To Date</th>
+                  <th class="px-4 py-2 text-left">Action</th>
+                </tr>
+              </thead>
+              <tbody id="reserved-table"></tbody>
+            </table>
+          </div>
+
+          <!-- Reserve Modal -->
+          <div
+            id="reserve-modal"
+            class="fixed inset-0 z-50 bg-gray-800 bg-opacity-75 flex items-center justify-center modal modal-hidden"
+          >
+            <div class="bg-white p-6 rounded-lg shadow-md max-w-lg w-11/12">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                Reserve Equipment
+              </h3>
+              <form id="reserve-form" class="space-y-4">
+                <input type="hidden" id="reserve-equipment-id" />
+                <div class="relative">
+                  <span
+                    class="absolute inset-y-0 left-0 flex items-center pl-4"
+                  >
+                    <i class="fas fa-tools text-indigo-600"></i>
+                  </span>
+                  <input
+                    type="text"
+                    id="reserve-equipment-name"
+                    class="w-full pl-12 p-3 border border-gray-300 rounded-lg bg-gray-100"
+                    readonly
+                  />
+                </div>
+                <div class="relative">
+                  <span
+                    class="absolute inset-y-0 left-0 flex items-center pl-4"
+                  >
+                    <i class="fas fa-user text-indigo-600"></i>
+                  </span>
+                  <input
+                    type="text"
+                    id="reserve-user-name"
+                    placeholder="Your Name"
+                    class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    required
+                  />
+                </div>
+                <div class="relative">
+                  <span
+                    class="absolute inset-y-0 left-0 flex items-center pl-4"
+                  >
+                    <i class="fas fa-envelope text-indigo-600"></i>
+                  </span>
+                  <input
+                    type="email"
+                    id="reserve-user-email"
+                    placeholder="Your Email"
+                    class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    required
+                  />
+                </div>
+                <div class="relative">
+                  <span
+                    class="absolute inset-y-0 left-0 flex items-center pl-4"
+                  >
+                    <i class="fas fa-calendar-alt text-indigo-600"></i>
+                  </span>
+                  <input
+                    type="date"
+                    id="reserve-from-date"
+                    class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    required
+                  />
+                </div>
+                <div class="relative">
+                  <span
+                    class="absolute inset-y-0 left-0 flex items-center pl-4"
+                  >
+                    <i class="fas fa-calendar-alt text-indigo-600"></i>
+                  </span>
+                  <input
+                    type="date"
+                    id="reserve-to-date"
+                    class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    required
+                  />
+                </div>
+                <div class="flex flex-col sm:flex-row justify-end space-x-0 sm:space-x-4 space-y-2 sm:space-y-0">
+                  <button
+                    type="button"
+                    id="cancel-reserve"
+                    class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg w-full sm:w-auto"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    id="reserve-button"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-lg w-full sm:w-auto"
+                  >
+                    Reserve
+                  </button>
+                </div>
+                <p
+                  id="reserve-error"
+                  class="text-red-500 text-center mt-2 hidden"
+                ></p>
+                <p
+                  id="reserve-success"
+                  class="text-green-500 text-center mt-2 hidden message"
+                ></p>
+              </form>
+            </div>
+          </div>
+
+          <!-- Return Confirmation Modal -->
+          <div
+            id="return-modal"
+            class="fixed inset-0 z-50 bg-gray-800 bg-opacity-75 flex items-center justify-center modal modal-hidden"
+          >
+            <div class="bg-white p-6 rounded-lg shadow-md max-w-lg w-11/12">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                Confirm Return
+              </h3>
+              <p id="return-message" class="mb-4">
+                Are you sure you want to return
+                <span id="return-equipment-name"></span>?
+              </p>
+              <input type="hidden" id="return-reservation-id" />
+              <input type="hidden" id="return-equipment-id" />
+              <div class="flex flex-col sm:flex-row justify-end space-x-0 sm:space-x-4 space-y-2 sm:space-y-0">
+                <button
+                  type="button"
+                  id="cancel-return"
+                  class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg w-full sm:w-auto"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  id="confirm-return"
+                  class="px-4 py-2 bg-green-600 text-white rounded-lg w-full sm:w-auto"
+                >
+                  Confirm Return
+                </button>
+              </div>
+              <p
+                id="return-error"
+                class="text-red-500 text-center mt-2 hidden"
+              ></p>
+              <p
+                id="return-success"
+                class="text-green-500 text-center mt-2 hidden message"
+              ></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+      // Google Sheets Web App URL
+      const APP_URL = "proxy.php";
+
+      // Sidebar Toggle
+      const sidebarToggle = document.getElementById("sidebar-toggle");
+      const sidebarClose = document.getElementById("sidebar-close");
+      const sidebar = document.getElementById("sidebar");
+      const sidebarOverlay = document.getElementById("sidebar-overlay");
+
+      function toggleSidebar() {
+        sidebar.classList.toggle("sidebar-hidden");
+        sidebarOverlay.classList.toggle("sidebar-overlay-hidden");
+      }
+
+      sidebarToggle.addEventListener("click", toggleSidebar);
+      sidebarClose.addEventListener("click", toggleSidebar);
+      sidebarOverlay.addEventListener("click", toggleSidebar);
+
+      window.addEventListener("scroll", () => {
+        sidebar.classList.add("sidebar-hidden");
+        sidebarOverlay.classList.add("sidebar-overlay-hidden");
+      });
+
+      // Tab Switching
+      const tabs = {
+        "add-equipment": document.getElementById("add-equipment-section"),
+        equipments: document.getElementById("equipments-section"),
+        reserved: document.getElementById("reserved-section"),
+      };
+      const tabButtons = {
+        "add-equipment": document.getElementById("add-equipment-tab"),
+        equipments: document.getElementById("equipments-tab"),
+        reserved: document.getElementById("reserved-tab"),
+      };
+
+      function showTab(tabName) {
+        Object.values(tabs).forEach((tab) => tab.classList.add("hidden"));
+        Object.values(tabButtons).forEach((btn) => {
+          btn.classList.remove("bg-indigo-600", "text-white");
+          btn.classList.add("bg-gray-300", "text-gray-800");
+        });
+
+        tabs[tabName].classList.remove("hidden");
+        tabButtons[tabName].classList.remove("bg-gray-300", "text-gray-800");
+        tabButtons[tabName].classList.add("bg-indigo-600", "text-white");
+
+        if (tabName === "equipments") fetchEquipments();
+        if (tabName === "reserved") fetchReservations();
+      }
+
+      tabButtons["add-equipment"].addEventListener("click", () =>
+        showTab("add-equipment")
+      );
+      tabButtons["equipments"].addEventListener("click", () =>
+        showTab("equipments")
+      );
+      tabButtons["reserved"].addEventListener("click", () =>
+        showTab("reserved")
+      );
+
+      // Initialize with Equipments tab
+      showTab("equipments");
+
+      // Add New Equipment
+      const addEquipmentForm = document.getElementById("add-equipment-form");
+      const addEquipmentButton = document.getElementById(
+        "add-equipment-button"
+      );
+      const addError = document.getElementById("add-error");
+      const addSuccess = document.getElementById("add-success");
+
+      addEquipmentForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        addError.classList.add("hidden");
+        addSuccess.classList.add("hidden");
+
+        const name = document.getElementById("new-equipment-name").value.trim();
+        const total = parseInt(document.getElementById("total-quantity").value);
+
+        if (!name || isNaN(total) || total < 0) {
+          addError.textContent =
+            "Please provide valid equipment name and quantity.";
+          addError.classList.remove("hidden");
+          return;
+        }
+
+        addEquipmentButton.textContent = "Adding...";
+        addEquipmentButton.disabled = true;
+
+        try {
+          const response = await fetch(APP_URL, {
+            method: "POST",
+            body: new URLSearchParams({
+              action: "add",
+              name: name,
+              total: total,
+            }).toString(),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          });
+
+          const result = await response.json();
+          console.log("Add Equipment Response:", result);
+          if (result.result === "success") {
+            addSuccess.textContent = "Equipment added successfully!";
+            addSuccess.classList.remove("hidden");
+            setTimeout(() => addSuccess.classList.add("hidden"), 2000);
+            addEquipmentForm.reset();
+            fetchEquipments();
+          } else {
+            addError.textContent = result.error || "Failed to add equipment.";
+            addError.classList.remove("hidden");
+          }
+        } catch (err) {
+          console.error("Add Equipment Error:", err);
+          addError.textContent = "Error: Unable to connect to the server.";
+          addError.classList.remove("hidden");
+        }
+
+        addEquipmentButton.textContent = "Add Equipment";
+        addEquipmentButton.disabled = false;
+      });
+
+      // Fetch Equipments
+      async function fetchEquipments() {
+        const tableBody = document.getElementById("equipment-table");
+        tableBody.innerHTML =
+          '<tr><td colspan="4" class="px-4 py-2 text-center">Loading...</td></tr>';
+
+        try {
+          console.log("Attempting to fetch equipments from:", APP_URL);
+          const response = await fetch(APP_URL, {
+            method: "GET",
+            headers: {
+              // Remove Content-Type to avoid preflight request
+              "Cache-Control": "no-cache",
+            },
+            mode: "cors", // Keep CORS mode
+            credentials: "omit", // Do not send cookies
+          });
+
+          if (!response.ok) {
+            throw new Error(
+              `HTTP error! Status: ${response.status} ${response.statusText}`
+            );
+          }
+
+          const data = await response.json();
+          console.log("Fetched Equipments:", data);
+
+          tableBody.innerHTML = "";
+
+          if (data.result === "error") {
+            tableBody.innerHTML = `<tr><td colspan="4" class="px-4 py-2 text-center text-red-500">${data.error}</td></tr>`;
+            return;
+          }
+
+          if (!Array.isArray(data) || data.length === 0) {
+            tableBody.innerHTML =
+              '<tr><td colspan="4" class="px-4 py-2 text-center">No equipment found.</td></tr>';
+            return;
+          }
+
+          data.forEach((equipment) => {
+            if (!equipment.id || !equipment.name) {
+              console.warn("Invalid equipment data:", equipment);
+              return;
+            }
+            const row = document.createElement("tr");
+            row.innerHTML = `
+        <td class="px-4 py-2">${equipment.name}</td>
+        <td class="px-4 py-2">${equipment.total}</td>
+        <td class="px-4 py-2">${equipment.available}</td>
+        <td class="px-4 py-2">
+          <button
+            class="reserve-btn px-4 py-1 bg-indigo-600 text-white rounded ${
+              equipment.available <= 0 ? "opacity-50 cursor-not-allowed" : ""
+            }"
+            data-id="${equipment.id}"
+            data-name="${equipment.name}"
+            ${equipment.available <= 0 ? "disabled" : ""}
+          >
+            Reserve
+          </button>
+        </td>
+      `;
+            tableBody.appendChild(row);
+          });
+
+          document.querySelectorAll(".reserve-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-id");
+              const name = btn.getAttribute("data-name");
+              openReserveModal(id, name);
+            });
+          });
+        } catch (err) {
+          console.error("Fetch Equipments Error Details:", err);
+          tableBody.innerHTML = `<tr><td colspan="4" class="px-4 py-2 text-center text-red-500">Failed to load equipment: ${err.message}</td></tr>`;
+        }
+      }
+
+      // Reserve Modal Handling
+      const reserveModal = document.getElementById("reserve-modal");
+      const reserveForm = document.getElementById("reserve-form");
+      const reserveButton = document.getElementById("reserve-button");
+      const cancelReserve = document.getElementById("cancel-reserve");
+      const reserveError = document.getElementById("reserve-error");
+      const reserveSuccess = document.getElementById("reserve-success");
+
+      function openReserveModal(id, name) {
+        document.getElementById("reserve-equipment-id").value = id;
+        document.getElementById("reserve-equipment-name").value = name;
+        reserveModal.classList.remove("modal-hidden");
+      }
+
+      function closeReserveModal() {
+        reserveModal.classList.add("modal-hidden");
+        reserveForm.reset();
+        reserveError.classList.add("hidden");
+        reserveSuccess.classList.add("hidden");
+      }
+
+      cancelReserve.addEventListener("click", closeReserveModal);
+
+      reserveForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        reserveError.classList.add("hidden");
+        reserveSuccess.classList.add("hidden");
+
+        const id = document.getElementById("reserve-equipment-id").value;
+        const userName = document
+          .getElementById("reserve-user-name")
+          .value.trim();
+        const userEmail = document
+          .getElementById("reserve-user-email")
+          .value.trim();
+        const fromDate = document.getElementById("reserve-from-date").value;
+        const toDate = document.getElementById("reserve-to-date").value;
+        const equipmentName = document.getElementById(
+          "reserve-equipment-name"
+        ).value;
+
+        if (!userName || !userEmail || !fromDate || !toDate) {
+          reserveError.textContent = "Please fill in all fields.";
+          reserveError.classList.remove("hidden");
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(userEmail)) {
+          reserveError.textContent = "Please enter a valid email.";
+          reserveError.classList.remove("hidden");
+          return;
+        }
+
+        const today = new Date().toISOString().split("T")[0];
+        if (fromDate < today) {
+          reserveError.textContent = "From date cannot be in the past.";
+          reserveError.classList.remove("hidden");
+          return;
+        }
+        if (toDate < fromDate) {
+          reserveError.textContent = "To date must be after From date.";
+          reserveError.classList.remove("hidden");
+          return;
+        }
+
+        reserveButton.textContent = "Reserving...";
+        reserveButton.disabled = true;
+
+        try {
+          const response = await fetch(APP_URL, {
+            method: "POST",
+            body: new URLSearchParams({
+              action: "reserve",
+              equipmentId: id,
+              user: userName,
+              email: userEmail,
+              fromDate: fromDate,
+              toDate: toDate,
+              equipmentName: equipmentName,
+            }).toString(),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          });
+
+          const result = await response.json();
+          console.log("Reserve Equipment Response:", result);
+          if (result.result === "success") {
+            reserveSuccess.textContent = "Equipment reserved successfully!";
+            reserveSuccess.classList.remove("hidden");
+            setTimeout(() => {
+              closeReserveModal();
+              fetchEquipments();
+              fetchReservations();
+            }, 2000);
+          } else {
+            reserveError.textContent =
+              result.error || "Failed to reserve equipment.";
+            reserveError.classList.remove("hidden");
+          }
+        } catch (err) {
+          console.error("Reserve Equipment Error:", err);
+          reserveError.textContent = "Error: Unable to connect to the server.";
+          reserveError.classList.remove("hidden");
+        }
+
+        reserveButton.textContent = "Reserve";
+        reserveButton.disabled = false;
+      });
+
+      // Fetch Reservations
+      async function fetchReservations() {
+        const tableBody = document.getElementById("reserved-table");
+        tableBody.innerHTML =
+          '<tr><td colspan="5" class="px-4 py-2 text-center">Loading...</td></tr>';
+
+        try {
+          const response = await fetch(APP_URL, {
+            method: "POST",
+            body: new URLSearchParams({
+              action: "list-reservations",
+            }).toString(),
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(
+              `HTTP error! Status: ${response.status} ${response.statusText}`
+            );
+          }
+
+          const data = await response.json();
+          console.log("Fetched Reservations:", data);
+
+          tableBody.innerHTML = "";
+
+          if (data.result === "error") {
+            tableBody.innerHTML = `<tr><td colspan="5" class="px-4 py-2 text-center text-red-500">${data.error}</td></tr>`;
+            return;
+          }
+
+          if (!Array.isArray(data) || data.length === 0) {
+            tableBody.innerHTML =
+              '<tr><td colspan="5" class="px-4 py-2 text-center">No reservations found.</td></tr>';
+            return;
+          }
+
+          data.forEach((reservation, index) => {
+            if (reservation.status !== "Returned") {
+              // Format the fromDate and toDate
+              const fromDate = new Date(reservation.fromDate);
+              const toDate = new Date(reservation.toDate);
+
+              // Format dates as "YYYY-MM-DD" (or use a different format if desired)
+              const formattedFromDate = fromDate.toISOString().split("T")[0]; // e.g., "2025-04-17"
+              const formattedToDate = toDate.toISOString().split("T")[0]; // e.g., "2025-04-25"
+
+              // Alternative format: "Apr 17, 2025"
+              // const formattedFromDate = fromDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+              // const formattedToDate = toDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+              const row = document.createElement("tr");
+              row.innerHTML = `
+          <td class="px-4 py-2">${reservation.equipmentName}</td>
+          <td class="px-4 py-2">${reservation.user}</td>
+          <td class="px-4 py-2">${formattedFromDate}</td>
+          <td class="px-4 py-2">${formattedToDate}</td>
+          <td class="px-4 py-2">
+            <button
+              class="return-btn px-4 py-1 bg-green-600 text-white rounded"
+              data-id="${index + 2}"
+              data-equipment-id="${reservation.equipmentId}"
+              data-equipment-name="${reservation.equipmentName}"
+            >
+              Return
+            </button>
+          </td>
+        `;
+              tableBody.appendChild(row);
+            }
+          });
+
+          document.querySelectorAll(".return-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-id");
+              const equipmentId = btn.getAttribute("data-equipment-id");
+              const equipmentName = btn.getAttribute("data-equipment-name");
+              openReturnModal(id, equipmentId, equipmentName);
+            });
+          });
+        } catch (err) {
+          console.error("Fetch Reservations Error Details:", err);
+          tableBody.innerHTML = `<tr><td colspan="5" class="px-4 py-2 text-center text-red-500">Failed to load reservations: ${err.message}</td></tr>`;
+        }
+      }
+
+      // Return Modal Handling
+      const returnModal = document.getElementById("return-modal");
+      const confirmReturn = document.getElementById("confirm-return");
+      const cancelReturn = document.getElementById("cancel-return");
+      const returnError = document.getElementById("return-error");
+      const returnSuccess = document.getElementById("return-success");
+
+      function openReturnModal(reservationId, equipmentId, equipmentName) {
+        document.getElementById("return-reservation-id").value = reservationId;
+        document.getElementById("return-equipment-id").value = equipmentId;
+        document.getElementById("return-equipment-name").textContent =
+          equipmentName;
+        document.getElementById(
+          "return-message"
+        ).innerHTML = `Are you sure you want to return <span class="font-semibold">${equipmentName}</span>?`;
+        returnModal.classList.remove("modal-hidden");
+      }
+
+      function closeReturnModal() {
+        returnModal.classList.add("modal-hidden");
+        returnError.classList.add("hidden");
+        returnSuccess.classList.add("hidden");
+      }
+
+      cancelReturn.addEventListener("click", closeReturnModal);
+
+      confirmReturn.addEventListener("click", async () => {
+        const reservationId = document.getElementById(
+          "return-reservation-id"
+        ).value;
+        const equipmentId = document.getElementById(
+          "return-equipment-id"
+        ).value;
+        returnError.classList.add("hidden");
+        returnSuccess.classList.add("hidden");
+
+        confirmReturn.textContent = "Returning...";
+        confirmReturn.disabled = true;
+
+        try {
+          const response = await fetch(APP_URL, {
+            method: "POST",
+            body: new URLSearchParams({
+              action: "return",
+              reservationId: reservationId,
+              equipmentId: equipmentId,
+            }).toString(),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          });
+
+          const result = await response.json();
+          console.log("Return Equipment Response:", result);
+          if (result.result === "success") {
+            returnSuccess.textContent = "Equipment returned successfully!";
+            returnSuccess.classList.remove("hidden");
+            setTimeout(() => {
+              closeReturnModal();
+              fetchReservations();
+              fetchEquipments();
+            }, 2000);
+          } else {
+            returnError.textContent =
+              result.error || "Failed to return equipment.";
+            returnError.classList.remove("hidden");
+          }
+        } catch (err) {
+          console.error("Return Equipment Error:", err);
+          returnError.textContent = "Error: Unable to connect to the server.";
+          returnError.classList.remove("hidden");
+        }
+
+        confirmReturn.textContent = "Confirm Return";
+        confirmReturn.disabled = false;
+      });
+    </script>
+  </body>
+</html>

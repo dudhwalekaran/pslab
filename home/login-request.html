@@ -1,0 +1,273 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Approval - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Success message animation */
+        .success-message {
+            animation: fadeInOut 2s ease-in-out;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+        /* Custom styles for better table and card layout */
+        .table-container {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .card-transition {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-transition:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* PFP styles */
+        .pfp {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+        /* Focus Styles for Accessibility */
+        button:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header (from lab-resources.html) -->
+    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button id="menu-toggle" class="sm:hidden text-2xl focus:outline-none" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="text-xl font-bold">IITB Power System Lab</h1>
+            </div>
+            <div id="nav-links" class="hidden sm:flex space-x-6 items-center">
+                <a href="dashboard.html" class="hover:text-gray-200 transition-colors duration-300">Home</a>
+                <a href="equipments.html" class="hover:text-gray-200 transition-colors duration-300">Equipment</a>
+                <a href="lab-resources.html" class="hover:text-gray-200 transition-colors duration-300">Resources</a>
+                <a href="documents.html" class="hover:text-gray-200 transition-colors duration-300">Documents</a>
+                <div class="relative group">
+                    <div class="absolute hidden group-hover:block bg-white text-gray-800 rounded-lg shadow-lg mt-2 w-48">
+                        <a href="meeting.html" class="block px-4 py-2 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-video mr-2"></i> Jitsi Meeting
+                        </a>
+                        <a href="upmath.html" class="block px-4 py-2 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-square-root-alt mr-2"></i> Upmath
+                        </a>
+                        <a href="excalidraw.html" class="block px-4 py-2 hover:bg-gray-100 flex items-center">
+                            <i class="fas fa-draw-polygon mr-2"></i> Excalidraw
+                        </a>
+                        <a href="login-request.html" class="block px-4 py-2 hover:bg-gray-100 flex items-center font-semibold">
+                            <i class="fas fa-user-plus mr-2"></i> Login Requests
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden sm:hidden bg-gray-900 text-white px-4 py-6">
+            <a href="dashboard.html" class="block py-2 hover:text-gray-300">Home</a>
+            <a href="equipments.html" class="block py-2 hover:text-gray-300">Equipment</a>
+            <a href="lab-resources.html" class="block py-2 hover:text-gray-300">Resources</a>
+            <a href="documents.html" class="block py-2 hover:text-gray-300">Documents</a>
+            <a href="meeting.html" class="block py-2 hover:text-gray-300 flex items-center">
+                <i class="fas fa-video mr-2"></i> Jitsi Meeting
+            </a>
+            <a href="upmath.html" class="block py-2 hover:text-gray-300 flex items-center">
+                <i class="fas fa-square-root-alt mr-2"></i> Upmath
+            </a>
+            <a href="excalidraw.html" class="block py-2 hover:text-gray-300 flex items-center">
+                <i class="fas fa-draw-polygon mr-2"></i> Excalidraw
+            </a>
+            <a href="login-request.html" class="block py-2 hover:text-gray-300 flex items-center font-semibold">
+                <i class="fas fa-user-plus mr-2"></i> Login Requests
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <section class="py-8 px-4 mt-10 mb-10">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Admin Approval Panel</h2>
+                <div class="table-container overflow-x-auto rounded-lg shadow-md">
+                    <table class="w-full text-left bg-white hidden md:table">
+                        <thead>
+                            <tr class="bg-indigo-800 text-white">
+                                <th class="p-3">Profile</th>
+                                <th class="p-3">Name</th>
+                                <th class="p-3">Email</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="request-list">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                    <div id="mobile-requests" class="md:hidden space-y-4">
+                        <!-- Cards will be populated by JavaScript -->
+                    </div>
+                </div>
+                <p id="status-message" class="text-center mt-4 text-green-500 hidden success-message"></p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navbar Toggle for Mobile (from lab-resources.html)
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            menuToggle.setAttribute('aria-expanded', isOpen);
+            menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Existing Admin Approval Scripts
+        const colors = [
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD',
+            '#D4A5A5', '#9B59B6', '#3498DB', '#E74C3C', '#2ECC71'
+        ];
+
+        function getInitials(name) {
+            if (!name) return 'NN';
+            const words = name.trim().split(' ');
+            if (words.length >= 2) {
+                return (words[0][0] + words[1][0]).toUpperCase();
+            }
+            return name[0].toUpperCase() + (words[0][1] || 'A').toUpperCase();
+        }
+
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        async function loadRequests() {
+            try {
+                const response = await fetch('../get-requests.php');
+                console.log('Fetch response status:', response.status);
+                if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
+                const requests = await response.json();
+                console.log('Fetched data:', requests);
+                const tbody = document.getElementById('request-list');
+                const mobileRequests = document.getElementById('mobile-requests');
+                const statusMessage = document.getElementById('status-message');
+                tbody.innerHTML = '';
+                mobileRequests.innerHTML = '';
+                statusMessage.classList.add('hidden');
+
+                if (!requests || requests.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="p-3 text-center text-gray-500">No pending requests.</td></tr>';
+                    mobileRequests.innerHTML = '<div class="p-3 text-center text-gray-500">No pending requests.</div>';
+                    return;
+                }
+
+                requests.forEach(request => {
+                    const initials = getInitials(request.name);
+                    const color = getRandomColor();
+
+                    const row = document.createElement('tr');
+                    row.className = 'border-b hover:bg-gray-100 transition-colors';
+                    row.innerHTML = `
+                        <td class="p-3"><div class="pfp" style="background-color: ${color}">${initials}</div></td>
+                        <td class="p-3">${request.name || 'N/A'}</td>
+                        <td class="p-3">${request.email}</td>
+                        <td class="p-3">${request.status}</td>
+                        <td class="p-3">
+                            <button onclick="handleRequest(${request.id}, 'accept')" class="bg-green-500 text-white px-2 py-1 rounded-full mr-2 hover:bg-green-600 transition-colors"><i class="fas fa-pencil-alt"></i></button>
+                            <button onclick="handleRequest(${request.id}, 'reject')" class="bg-red-500 text-white px-2 py-1 rounded-full mr-2 hover:bg-red-600 transition-colors"><i class="fas fa-trash"></i></button>
+                            <button onclick="handleRequest(${request.id}, 'delete')" class="bg-gray-500 text-white px-2 py-1 rounded-full hover:bg-gray-600 transition-colors"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+
+                    const card = document.createElement('div');
+                    card.className = 'bg-white p-4 rounded-lg shadow-md card-transition';
+                    card.innerHTML = `
+                        <div class="flex items-center mb-2">
+                            <div class="pfp mr-3" style="background-color: ${color}">${initials}</div>
+                            <div>
+                                <p class="font-semibold">${request.name || 'N/A'}</p>
+                                <p class="text-sm text-gray-600">${request.email}</p>
+                            </div>
+                        </div>
+                        <p><strong>Status:</strong> ${request.status}</p>
+                        <div class="mt-3 space-x-2">
+                            <button onclick="handleRequest(${request.id}, 'accept')" class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition-colors"><i class="fas fa-pencil-alt"></i></button>
+                            <button onclick="handleRequest(${request.id}, 'reject')" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors"><i class="fas fa-trash"></i></button>
+                            <button onclick="handleRequest(${request.id}, 'delete')" class="bg-gray-500 text-white p-2 rounded-full hover:bg-gray-600 transition-colors"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    `;
+                    mobileRequests.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading requests:', error);
+                const tbody = document.getElementById('request-list');
+                const mobileRequests = document.getElementById('mobile-requests');
+                tbody.innerHTML = '<tr><td colspan="5" class="p-3 text-center text-red-500">Failed to load requests. Check console. Error: ' + error.message + '</td></tr>';
+                mobileRequests.innerHTML = '<div class="p-3 text-center text-red-500">Failed to load requests. Check console. Error: ' + error.message + '</div>';
+            }
+        }
+
+        async function handleRequest(id, action) {
+            try {
+                console.log('Sending request:', { id, action });
+                const response = await fetch('../handle-request.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, action })
+                });
+                console.log('Response status:', response.status);
+                if (!response.ok) throw new Error('HTTP error ' + response.status);
+                const data = await response.json();
+                console.log('Response data:', data);
+                const statusMessage = document.getElementById('status-message');
+                if (data.success) {
+                    statusMessage.textContent = data.message;
+                    statusMessage.classList.remove('hidden');
+                    setTimeout(() => statusMessage.classList.add('hidden'), 2000);
+                    loadRequests();
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error handling request:', error);
+                alert('An error occurred. Check console for details. Error: ' + error.message);
+            }
+        }
+
+        window.onload = function() {
+            loadRequests();
+        };
+
+        // Debug log to confirm loading
+        console.log("Loading admin-approval.html - No redirects should occur.");
+    </script>
+</body>
+</html>

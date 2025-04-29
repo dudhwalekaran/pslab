@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-bg {
+            background-image: url('https://via.placeholder.com/1920x500?text=Sinwave+Background');
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #374151;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .section-description {
+            font-size: 1rem;
+            color: #6b7280;
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto 2rem;
+        }
+        .subject-card {
+            background: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100%;
+        }
+        .subject-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+        .subject-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .subject-subtext {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.25rem;
+        }
+        .card-expanded {
+            max-height: 300px;
+            opacity: 1;
+        }
+        .card-collapsed {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold tracking-tight">IITB Power System Lab</h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 px-6">
+                    <li><a href="../index.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Home</a></li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Academics/Research</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Academics & Research</li>
+                            <li><a href="/pslab/academics/subjects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Subjects</a></li>
+                            <li><a href="/pslab/academics/research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Research</a></li>
+                            <li><a href="/pslab/academics/current-research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Current Research</a></li>
+                            <li><a href="/pslab/academics/explore-projects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Explore Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Laboratory Facilities</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Facilities</li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Power Systems Lab</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Resources</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Resources</li>
+                            <li><a href="/pslab/resources/library.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Library</a></li>
+                            <li><a href="/pslab/resources/software.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Software</a></li>
+                            <li><a href="/pslab/resources/educational-videos.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Videos</a></li>
+                            <li><a href="https://mkdocs-three.vercel.app/" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Content</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">People</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Our Team</li>
+                            <li><a href="/pslab/peoples/faculty.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Faculty</a></li>
+                            <li><a href="/pslab/peoples/students.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Students</a></li>
+                            <li><a href="/pslab/peoples/alumni.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Alumni</a></li>
+                            <li><a href="/pslab/peoples/staff.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Staff</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="../news.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">News</a>
+                    </li>
+                    <li><a href="../login.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Login</a></li>
+                </ul>
+            </nav>
+
+            <!-- IITB Logo -->
+            <div class="transform hover:scale-105 transition-transform duration-300 ml-4">
+                <img src="../public/iitb.png" alt="IITB Logo" class="h-12">
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+            <ul class="flex flex-col space-y-4 p-4">
+                <li><a href="../index.html" class="block py-2">Home</a></li>
+                <li>
+                    <a href="#" class="block py-2">Academics/Research</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Academics & Research</li>
+                        <li><a href="/pslab/academics/subjects.html" class="block py-1">Subject</a></li>
+                        <li><a href="/pslab/academics/research.html" class="block py-1">Research</a></li>
+                        <li><a href="/pslab/academics/current-research.html" class="block py-1">Current Research</a></li>
+                        <li><a href="/pslab/academics/explore-projects.html" class="block py-1">Explore Projects</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Laboratory Facilities</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Facilities</li>
+                        <li><a href="#" class="block py-1">Power Systems Lab</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Resources</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Resources</li>
+                        <li><a href="/pslab/resources/library.html" class="block py-1">Library</a></li>
+                        <li><a href="/pslab/resources/software.html" class="block py-1">Software</a></li>
+                        <li><a href="/pslab/resources/educational-videos.html" class="block py-1">Educational Videos</a></li>
+                        <li><a href="https://mkdocs-three.vercel.app/" class="block py-1">Educational Content</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">People</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Our Team</li>
+                        <li><a href="/pslab/peoples/faculty.html" class="block py-1">Faculty</a></li>
+                        <li><a href="/pslab/peoples/students.html" class="block py-1">Students</a></li>
+                        <li><a href="/pslab/peoples/alumni.html" class="block py-1">Alumni</a></li>
+                        <li><a href="/pslab/peoples/staff.html" class="block py-1">Staff</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../news.html" class="block py-2">News</a>
+                </li>
+                <li><a href="../login.html" class="block py-2">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Academics Overview Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto">
+                <h2 class="section-title">Our Academic Programs</h2>
+                <p class="section-description">
+                    The IITB Power Systems Lab offers a diverse range of academic programs that cover the latest advancements in power systems analysis, dynamics, economics, and more. Explore our subjects to gain in-depth knowledge and hands-on experience.
+                </p>
+            </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section class="py-16 bg-gray-100" id="subjects">
+            <div class="container mx-auto">
+                <h2 class="section-title">Academic Subjects</h2>
+                <div class="grid">
+                    <script>
+                        const subjectDetails = {
+                            "Power Systems Analysis": {
+                                description: "Power Systems Analysis is focused on the study of electrical power generation, transmission, and distribution systems, emphasizing system stability, load flow analysis, and fault diagnosis.",
+                                topics: ["Basic principles of power systems", "Load flow analysis techniques", "Fault analysis and protection schemes", "Power system stability and dynamics"],
+                                moreDetails: { overview: "Power Systems Analysis is a core field in electrical engineering, focusing on the methods used to assess the operational performance of electrical grids. The subject covers fundamental concepts that are crucial for the design, analysis, and operation of power systems.", applications: "This course helps students develop the necessary skills to analyze power systems under various conditions, ensuring efficient and stable electricity distribution across regions." },
+                                link: "https://www.youtube.com/",
+                                icon: "<i class='fas fa-bolt text-indigo-600 mr-2'></i>"
+                            },
+                            CAPSA: {
+                                description: "CAPSA (Computer Applications in Power System Analysis) explores the use of computational tools in the analysis and simulation of power systems, including the application of numerical methods and optimization techniques.",
+                                topics: ["Numerical methods for power system analysis", "Optimization techniques in power systems", "Simulation of power system behavior", "Real-time system monitoring and control"],
+                                moreDetails: { overview: "CAPSA explores the integration of computer-based tools with power systems to simulate, analyze, and optimize system performance. It includes computational techniques that allow for more efficient decision-making and system management.", applications: "Students will gain hands-on experience using computational methods and software tools for real-world power system analysis, making them industry-ready." },
+                                icon: "<i class='fas fa-laptop-code text-indigo-600 mr-2'></i>"
+                            },
+                            "Power system operation and control": {
+                                description: "This subject deals with the real-time operation of power systems, focusing on control methods, energy management, and system security to maintain stable and reliable power distribution.",
+                                topics: ["Real-time control of power systems", "Energy management systems", "System security and reliability", "Economic dispatch and unit commitment"],
+                                moreDetails: { overview: "In Power System Operation and Control, students will understand the real-time challenges of maintaining a reliable and secure power system. Topics include control techniques, optimization, and grid security.", applications: "This course prepares students to tackle challenges like energy crisis management, grid reliability, and system optimization under changing demand." },
+                                link: "https://portal.iitb.ac.in/asc/Courses/crsedetail.jsp?ccd=EE%20658",
+                                icon: "<i class='fas fa-cogs text-indigo-600 mr-2'></i>"
+                            },
+                            "Dynamics and Transients": {
+                                description: "This subject covers the dynamic behavior of power systems during disturbances, including transient stability analysis, power oscillations, and the effects of different faults on system stability.",
+                                topics: ["Transient stability analysis", "Power oscillations and damping", "System responses to faults", "Dynamic simulation and modeling"],
+                                moreDetails: { overview: "Dynamics and Transients explores the behavior of power systems during fault conditions, focusing on how disturbances affect the system's performance. This subject is critical for ensuring power systems can recover quickly from disruptions.", applications: "Students will learn how to analyze and model power system responses to transients and faults, an essential skill in grid operation and protection." },
+                                icon: "<i class='fas fa-wave-square text-indigo-600 mr-2'></i>"
+                            },
+                            Protection: {
+                                description: "Protection systems are critical for the safe operation of power grids. This subject focuses on protective relaying, fault detection, and the design of protection schemes to prevent system failures.",
+                                topics: ["Protective relaying principles", "Fault detection and isolation", "Relay coordination and protection schemes", "Power system protection techniques"],
+                                moreDetails: { overview: "Protection is crucial in power systems to prevent damage during faults. This subject focuses on designing, coordinating, and implementing protection systems that ensure reliability and safety in the grid.", applications: "This course teaches students the design and operational implementation of protection schemes that are widely used in industry, protecting critical infrastructure from failures." },
+                                link: "https://portal.iitb.ac.in/asc/Courses/crsedetail.jsp?ccd=EE%20651",
+                                icon: "<i class='fas fa-shield-alt text-indigo-600 mr-2'></i>"
+                            },
+                            "Power System Economics": {
+                                description: "Power System Economics examines the economic aspects of power generation and distribution, including pricing models, cost optimization, and market structures for efficient power system operations.",
+                                topics: ["Economic dispatch and cost optimization", "Pricing models and market structures", "Energy trading and deregulated markets", "Power system economics and policy"],
+                                moreDetails: { overview: "Power System Economics focuses on the financial aspects of running a power system. Students will explore economic models, energy markets, and strategies for optimizing energy generation and distribution.", applications: "Students will gain insights into market-driven energy systems and how to optimize power generation for cost-effective and sustainable operations." },
+                                icon: "<i class='fas fa-chart-line text-indigo-600 mr-2'></i>"
+                            },
+                            HVDC: {
+                                description: "HVDC (High Voltage Direct Current) systems are used for efficient long-distance power transmission. This subject covers the principles and technologies of HVDC systems and their applications.",
+                                topics: ["Principles of HVDC transmission", "Converters and inverters in HVDC systems", "HVDC control systems", "Applications of HVDC in power systems"],
+                                moreDetails: { overview: "HVDC technology allows for the efficient transmission of power over long distances with minimal losses. The subject explores HVDC system components and their role in modern power grids.", applications: "This course prepares students to understand and design HVDC systems for both interconnection of power grids and the integration of renewable energy sources." },
+                                link: "https://portal.iitb.ac.in/asc/Courses/crsedetail.jsp?ccd=EE%20686",
+                                icon: "<i class='fas fa-plug text-indigo-600 mr-2'></i>"
+                            },
+                            Mathematics: {
+                                description: "This subject focuses on mathematical tools and techniques applied to electrical engineering, including linear algebra, differential equations, and optimization techniques.",
+                                topics: ["Linear algebra and matrices", "Differential equations", "Fourier and Laplace transforms", "Optimization and numerical methods"],
+                                moreDetails: { overview: "Mathematics is the foundation for understanding complex systems in electrical engineering. This subject equips students with the tools needed for analyzing and solving power system problems.", applications: "Students will gain the mathematical skills to model and analyze power systems, from optimization to dynamic analysis of system behavior." },
+                                link: "https://portal.iitb.ac.in/asc/Courses/crsedetail.jsp?ccd=EE%20759",
+                                icon: "<i class='fas fa-calculator text-indigo-600 mr-2'></i>"
+                            },
+                            "Electrical Grid/Measurement/Design/Control (Miscellaneous)": {
+                                description: "This subject covers the integration and control of electrical grids, measurement techniques, and the design of electrical systems for various applications.",
+                                topics: ["Grid integration techniques", "Measurement systems in electrical engineering", "Control methods in electrical grid design", "Electrical system design and optimization"],
+                                moreDetails: { overview: "Students will explore the design and control aspects of electrical grids, focusing on the practical challenges in grid integration, measurement, and control systems.", applications: "This course provides practical knowledge and skills to design, control, and optimize electrical systems for both large-scale and distributed generation." },
+                                icon: "<i class='fas fa-tachometer-alt text-indigo-600 mr-2'></i>"
+                            },
+                            Controls: {
+                                description: "Control theory focuses on the analysis and design of control systems, with applications in power systems, robotics, and automation.",
+                                topics: ["Control system fundamentals", "PID controllers", "State-space analysis", "Stability and performance of control systems"],
+                                moreDetails: { overview: "Control theory is fundamental to understanding the behavior and stability of dynamic systems. Students will learn how to design control systems to regulate electrical systems effectively.", applications: "Students will apply control theory to power systems, robotics, and automation, learning to ensure the desired performance of various dynamic systems." },
+                                link: "https://portal.iitb.ac.in/asc/Courses/crsedetail.jsp?ccd=EE%20302",
+                                icon: "<i class='fas fa-sliders-h text-indigo-600 mr-2'></i>"
+                            },
+                            "Digital Communication": {
+                                description: "Digital Communication focuses on the principles and technologies used in transmitting data over various communication channels, with applications in power system monitoring and control.",
+                                topics: ["Digital modulation and coding", "Error detection and correction", "Communication protocols in power systems", "Data transmission techniques"],
+                                moreDetails: { overview: "Digital Communication is vital for modern power systems, enabling efficient data exchange between devices. This subject covers the essential communication technologies used in electrical engineering applications.", applications: "Students will explore how digital communication technologies are applied in monitoring, control, and data analysis in power systems." },
+                                icon: "<i class='fas fa-satellite-dish text-indigo-600 mr-2'></i>"
+                            },
+                            "Signal and Systems": {
+                                description: "Signal and Systems deals with the study of signals and their analysis, including both continuous and discrete signals, and the system behaviors that process these signals.",
+                                topics: ["Signal representation and classification", "Fourier series and transforms", "Linear time-invariant systems", "Sampling and reconstruction"],
+                                moreDetails: { overview: "This subject introduces students to the fundamental concepts of signals and systems, with a focus on their analysis and processing techniques.", applications: "Students will learn to apply signal processing techniques in power systems, telecommunications, and control systems." },
+                                icon: "<i class='fas fa-signal text-indigo-600 mr-2'></i>"
+                            },
+                            Microprocessors: {
+                                description: "Microprocessors are central to modern computing systems. This subject covers the architecture, programming, and application of microprocessors in various engineering domains.",
+                                topics: ["Microprocessor architecture and design", "Assembly language programming", "I/O interfacing and peripherals", "Embedded systems applications"],
+                                moreDetails: { overview: "Microprocessors form the backbone of modern electronic systems. This subject provides students with knowledge of microprocessor architecture and programming skills.", applications: "Students will learn to design and implement embedded systems, applying microprocessor technologies in fields such as control, automation, and power systems." },
+                                link: "https://portal.iitb.ac.in/asc/Courses/crsedetail.jsp?ccd=EE%20309",
+                                icon: "<i class='fas fa-microchip text-indigo-600 mr-2'></i>"
+                            },
+                            Machine: {
+                                description: "Machine learning techniques are used to analyze and predict the behavior of complex systems. This subject covers both supervised and unsupervised learning techniques and their applications in electrical engineering.",
+                                topics: ["Supervised learning algorithms", "Unsupervised learning and clustering", "Neural networks and deep learning", "Machine learning in power systems"],
+                                moreDetails: { overview: "Machine learning has revolutionized many engineering fields, including electrical power systems. Students will learn to apply machine learning techniques to analyze and optimize system performance.", applications: "This course will teach students to apply machine learning models in tasks such as system prediction, fault detection, and optimization in power systems." },
+                                link: "https://youtube.com",
+                                icon: "<i class='fas fa-brain text-indigo-600 mr-2'></i>"
+                            },
+                            "Power Electronics": {
+                                description: "Power Electronics is concerned with the conversion and control of electrical power using semiconductor devices. This subject covers the analysis, design, and applications of power converters.",
+                                topics: ["Power semiconductor devices", "DC-DC converters and AC-DC rectifiers", "Inverters and motor drives", "Power electronics applications in power systems"],
+                                moreDetails: { overview: "Power Electronics enables efficient power conversion and control. This subject explores the fundamentals of power electronic devices and their applications in modern electrical systems.", applications: "Students will gain knowledge on the design of power electronic systems for energy conversion and efficient management of electrical power." },
+                                link: "https://portal.iitb.ac.in/asc/Courses/crsedetail.jsp?ccd=EE%20309",
+                                icon: "<i class='fas fa-plug text-indigo-600 mr-2'></i>"
+                            },
+                            "Computer Programming": {
+                                description: "Computer Programming covers the fundamental concepts of programming, including algorithms, data structures, and software development techniques used in electrical engineering applications.",
+                                topics: ["Introduction to programming languages", "Algorithms and data structures", "Software development life cycle", "Applications of programming in electrical systems"],
+                                moreDetails: { overview: "Computer programming is a vital skill for electrical engineers. This subject teaches programming fundamentals and their application in solving real-world electrical engineering problems.", applications: "Students will learn to develop software for automation, system control, and data analysis in power systems and other electrical engineering applications." },
+                                icon: "<i class='fas fa-code text-indigo-600 mr-2'></i>"
+                            }
+                        };
+
+                        let selectedSubject = null;
+
+                        function handleSubjectClick(subject) {
+                            selectedSubject = selectedSubject === subject ? null : subject;
+                            updateDisplay();
+                        }
+
+                        function updateDisplay() {
+                            const descriptions = document.querySelectorAll('.subject-description');
+                            descriptions.forEach(desc => {
+                                const subject = desc.getAttribute('data-subject');
+                                desc.classList.toggle('card-expanded', selectedSubject === subject);
+                                desc.classList.toggle('card-collapsed', selectedSubject !== subject);
+                            });
+
+                            const detailedSection = document.getElementById('detailed-info');
+                            const detailedTitle = document.getElementById('detailed-title');
+                            const detailedOverview = document.getElementById('detailed-overview');
+                            const detailedApplications = document.getElementById('detailed-applications');
+                            const detailedLink = document.getElementById('detailed-link');
+
+                            if (selectedSubject) {
+                                const subjectData = subjectDetails[selectedSubject];
+                                detailedSection.classList.remove('hidden');
+                                detailedTitle.textContent = `Detailed Information on ${selectedSubject}`;
+                                detailedOverview.textContent = subjectData.moreDetails.overview;
+                                detailedApplications.textContent = subjectData.moreDetails.applications;
+
+                                if (subjectData.link) {
+                                    detailedLink.href = subjectData.link;
+                                    detailedLink.classList.remove('hidden');
+                                } else {
+                                    detailedLink.classList.add('hidden');
+                                }
+                                detailedSection.scrollIntoView({ behavior: 'smooth' });
+                            } else {
+                                detailedSection.classList.add('hidden');
+                            }
+                        }
+
+                        // Dynamically generate subject cards
+                        const subjectsContainer = document.querySelector('.grid');
+                        Object.keys(subjectDetails).forEach(subject => {
+                            const div = document.createElement('div');
+                            div.className = 'subject-card';
+                            div.innerHTML = `
+                                <h3 class="subject-title" onclick="handleSubjectClick('${subject}')">
+                                    ${subjectDetails[subject].icon} ${subject}
+                                </h3>
+                                <p class="subject-subtext">Click to explore this subject.</p>
+                                <div class="subject-description card-collapsed space-y-2 text-sm transition-all duration-500 ease-in-out mt-4" data-subject="${subject}">
+                                    <p class="text-gray-600">${subjectDetails[subject].description}</p>
+                                    <ul class="list-disc pl-5 text-gray-600">
+                                        ${subjectDetails[subject].topics.map(topic => `<li>${topic}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            `;
+                            subjectsContainer.appendChild(div);
+                        });
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Information Section -->
+        <section id="detailed-info" class="py-24 bg-white hidden">
+            <div class="container mx-auto text-center">
+                <h3 id="detailed-title" class="text-2xl font-bold mb-6 text-gray-800"></h3>
+                <p id="detailed-overview" class="text-lg max-w-4xl mx-auto mb-6 text-gray-600"></p>
+                <p id="detailed-applications" class="text-lg max-w-4xl mx-auto mb-6 text-gray-600"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-8 shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-4">IITB Power System Lab</h3>
+                    <p class="text-sm text-gray-300">Advancing the future of power systems through innovation and research.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p class="text-sm text-gray-300">Department of Electrical Engineering</p>
+                    <p class="text-sm text-gray-300">IIT Bombay, Powai</p>
+                    <p class="text-sm text-gray-300">Mumbai 400076, India</p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-envelope mr-2"></i>Email: powersys@iitb.ac.in
+                    </p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-phone mr-2"></i>Phone: +91 22 2159 3505
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="/pslab/index.html" class="hover:text-indigo-300 transition-colors duration-300">Home</a></li>
+                        <li><a href="/pslab/academics/research.html" class="hover:text-indigo-300 transition-colors duration-300">Research</a></li>
+                        <li><a href="/pslab/peoples/faculty.html" class="hover:text-indigo-300 transition-colors duration-300">People</a></li>
+                        <li><a href="/pslab/news.html" class="hover:text-indigo-300 transition-colors duration-300">News</a></li>
+                        <li><a href="/pslab/contact-us.html" class="hover:text-indigo-300 transition-colors duration-300">Contact Us</a></li>
+                        <li><a href="https://voltvault-roan.vercel.app/" class="hover:text-indigo-300 transition-colors duration-300">Voltvault</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@pslab_iitb" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-400 border-t border-indigo-700 pt-4">
+                © 2025 IITB Power System Lab. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

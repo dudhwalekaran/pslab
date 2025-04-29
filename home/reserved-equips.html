@@ -1,0 +1,174 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserved Equipment - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .sidebar-hidden { transform: translateX(-100%); }
+        .sidebar-overlay { transition: opacity 0.3s ease-in-out; }
+        .sidebar-overlay-hidden { opacity: 0; pointer-events: none; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between">
+            <button id="sidebar-toggle" class="text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="flex space-x-6">
+                <li><a href="dashboard.html" class="hover:text-gray-300 transition-colors duration-300">Home</a></li>
+                <li><a href="reserved-equips.html" class="hover:text-gray-300 transition-colors duration-300">Equipment</a></li>
+                <li><a href="lab-resources.html" class="hover:text-gray-300 transition-colors duration-300">Lab Resources</a></li>
+                <li><a href="documents.html" class="hover:text-gray-300 transition-colors duration-300">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 sidebar-overlay sidebar-overlay-hidden">
+        <div id="sidebar" class="w-52 bg-gray-900 text-white fixed top-0 left-0 h-full p-6 sidebar sidebar-hidden">
+            <div class="flex justify-end">
+                <button id="sidebar-close" class="text-white text-3xl focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-4 mt-6">
+                <a href="meeting.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-video mr-2"></i> Jitsi Meeting
+                </a>
+                <a href="upmath.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-square-root-alt mr-2"></i> Upmath
+                </a>
+                <a href="excalidraw.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-draw-polygon mr-2"></i> Excalidraw
+                </a>
+                <a href="login-request.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-user-plus mr-2"></i> Login Requests
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Reserved Equipment</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="p-3">Reserved On</th>
+                                <th class="p-3">Equipment</th>
+                                <th class="p-3">User</th>
+                                <th class="p-3">From</th>
+                                <th class="p-3">To</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservations-table" class="divide-y divide-gray-200">
+                            <!-- Data fetched here -->
+                        </tbody>
+                    </table>
+                    <p id="fetch-error" class="text-red-500 text-center mt-4 hidden"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="../script.js"></script>
+    <script>
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('sidebar-hidden');
+            sidebarOverlay.classList.toggle('sidebar-overlay-hidden');
+        }
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        sidebarClose.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        window.addEventListener('scroll', () => {
+            sidebar.classList.add('sidebar-hidden');
+            sidebarOverlay.classList.add('sidebar-overlay-hidden');
+        });
+
+        google.charts.load('current', { packages: ['table'] });
+        google.charts.setOnLoadCallback(loadReservations);
+
+        let allReservations = [];
+
+        function loadReservations() {
+            const sheetID = '15AyKLME9pkAFUN2n-_PcDjiJlExir8pyJYtuyyYiJ4g'; // Replace with your actual Sheet ID for reservations
+            const query = new google.visualization.Query(
+                `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?sheet=Sheet1&tq&headers=1`
+            );
+
+            query.send(function(response) {
+                if (response.isError()) {
+                    document.getElementById('fetch-error').textContent = 
+                        `Error loading reservations: ${response.getMessage()}`;
+                    document.getElementById('fetch-error').classList.remove('hidden');
+                    console.error('Query error:', response.getMessage());
+                    return;
+                }
+
+                const data = response.getDataTable();
+                allReservations = [];
+                
+                for (let i = 0; i < data.getNumberOfRows(); i++) {
+                    allReservations.push({
+                        Timestamp: data.getValue(i, 4) ? new Date(data.getValue(i, 4)).toLocaleString() : 'N/A',
+                        Equipment: data.getValue(i, 0) || 'N/A',
+                        User: data.getValue(i, 1) || 'N/A',
+                        FromDate: data.getValue(i, 2) || 'N/A',
+                        ToDate: data.getValue(i, 3) || 'N/A',
+                    });
+                }
+
+                renderReservations(allReservations);
+            });
+        }
+
+        function renderReservations(reservations) {
+            const tbody = document.getElementById('reservations-table');
+            let html = '';
+            
+            if (reservations.length === 0) {
+                html = '<tr><td colspan="5" class="py-3 px-4 text-center text-gray-500">No reservations found</td></tr>';
+            } else {
+                reservations.forEach(reservation => {
+                    html += `
+                        <tr class="hover:bg-gray-100 transition-colors">
+                            <td class="py-3 px-4">${reservation.Equipment}</td>
+                            <td class="py-3 px-4">${reservation.User}</td>
+                            <td class="py-3 px-4">${reservation.FromDate}</td>
+                            <td class="py-3 px-4">${reservation.ToDate}</td>
+                            <td class="py-3 px-4">${reservation.Timestamp}</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            tbody.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Modal fade-in animation */
+        .modal {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .modal-hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .modal-visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold tracking-tight">IITB Power System Lab</h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 px-6">
+                    <li><a href="../index.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Home</a></li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Academics/Research</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Academics & Research</li>
+                            <li><a href="/pslab/academics/subjects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Subjects</a></li>
+                            <li><a href="/pslab/academics/research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Research</a></li>
+                            <li><a href="/pslab/academics/current-research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Current Research</a></li>
+                            <li><a href="/pslab/academics/explore-projects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Explore Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Laboratory Facilities</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Facilities</li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Power Systems Lab</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Resources</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Resources</li>
+                            <li><a href="/pslab/resources/library.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Library</a></li>
+                            <li><a href="/pslab/resources/software.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Software</a></li>
+                            <li><a href="/pslab/resources/educational-videos.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Videos</a></li>
+                            <li><a href="https://mkdocs-three.vercel.app/" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Content</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">People</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Our Team</li>
+                            <li><a href="/pslab/peoples/faculty.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Faculty</a></li>
+                            <li><a href="/pslab/peoples/students.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Students</a></li>
+                            <li><a href="/pslab/peoples/alumni.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Alumni</a></li>
+                            <li><a href="/pslab/peoples/staff.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Staff</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="../news.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">News</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Updates</li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Events</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Announcements</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Achievements</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../login.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Login</a></li>
+                </ul>
+            </nav>
+
+            <!-- IITB Logo -->
+            <div class="transform hover:scale-105 transition-transform duration-300 ml-4">
+                <img src="../public/iitb.png" alt="IITB Logo" class="h-12">
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+            <ul class="flex flex-col space-y-4 p-4">
+                <li><a href="../index.html" class="block py-2">Home</a></li>
+                <li>
+                    <a href="#" class="block py-2">Academics/Research</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Academics & Research</li>
+                        <li><a href="/pslab/academics/subjects.html" class="block py-1">Subjects</a></li>
+                        <li><a href="/pslab/academics/research.html" class="block py-1">Research</a></li>
+                        <li><a href="/pslab/academics/current-research.html" class="block py-1">Current Research</a></li>
+                        <li><a href="/pslab/academics/explore-projects.html" class="block py-1">Explore Projects</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Laboratory Facilities</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Facilities</li>
+                        <li><a href="#" class="block py-1">Power Systems Lab</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Resources</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Resources</li>
+                        <li><a href="/pslab/resources/library.html" class="block py-1">Library</a></li>
+                        <li><a href="/pslab/resources/software.html" class="block py-1">Software</a></li>
+                        <li><a href="/pslab/resources/educational-videos.html" class="block py-1">Educational Videos</a></li>
+                        <li><a href="https://mkdocs-three.vercel.app/" class="block py-1">Educational Content</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">People</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Our Team</li>
+                        <li><a href="/pslab/peoples/faculty.html" class="block py-1">Faculty</a></li>
+                        <li><a href="/pslab/peoples/staff.html" class="block py-1">Students</a></li>
+                        <li><a href="/pslab/peoples/alumni.html" class="block py-1">Alumni</a></li>
+                        <li><a href="/pslab/peoples/staff.html" class="block py-1">Staff</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../news.html" class="block py-2">News</a>
+                </li>
+                <li><a href="..login.html" class="block py-2">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Staff Grid Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Our Staff Members</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <!-- Staff Member 1 -->
+                    <div class="bg-white rounded-lg shadow-xl p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="mb-6">
+                            <img src="../public/staff/navneet.webp" alt="K Navaneeth" class="w-32 h-32 rounded-full mx-auto object-cover">
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">K Navaneeth</h3>
+                        <p class="text-lg text-gray-600">Research Project Assistant</p>
+                        <p class="text-sm text-gray-500 mt-4">Power and Energy Systems</p>
+                        <div class="mt-6 space-y-2 text-gray-700">
+                            <p class="flex items-center justify-center">
+                                <i class="fas fa-envelope text-indigo-600 mr-2"></i>
+                                Email: <span class="text-gray-500 ml-1">Not Available</span>
+                            </p>
+                        </div>
+                        <button 
+                            class="mt-6 bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-700 transition-colors duration-300"
+                            onclick="openModal('navaneeth')"
+                        >
+                            More Info
+                        </button>
+                    </div>
+
+                    <!-- Staff Member 2 -->
+                    <div class="bg-white rounded-lg shadow-xl p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="mb-6">
+                            <img src="../public/staff/harshala.webp" alt="Harshala Ranade" class="w-32 h-32 rounded-full mx-auto object-cover">
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Harshala Ranade</h3>
+                        <p class="text-lg text-gray-600">Senior Project Assistant</p>
+                        <p class="text-sm text-gray-500 mt-4"></p>
+                        <div class="mt-6 space-y-2 text-gray-700">
+                            <p class="flex items-center justify-center">
+                                <i class="fas fa-envelope text-indigo-600 mr-2"></i>
+                                Email: <span class="text-gray-500 ml-1">Not Available</span>
+                            </p>
+                        </div>
+                        <button 
+                            class="mt-6 bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-700 transition-colors duration-300"
+                            onclick="openModal('harshala')"
+                        >
+                            More Info
+                        </button>
+                    </div>
+
+                    <!-- Add more staff members here as needed -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal for K Navaneeth -->
+        <div id="modal-navaneeth" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 hidden modal modal-hidden">
+            <div class="bg-white p-8 rounded-lg w-96 max-w-full relative">
+                <button 
+                    class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
+                    onclick="closeModal('navaneeth')"
+                >
+                    &times;
+                </button>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">K Navaneeth</h3>
+                <p class="text-lg text-gray-600 mb-4">Research Project Assistant</p>
+                <p class="text-sm text-gray-500 mb-4">Power and Energy Systems</p>
+                <div class="mt-4 space-y-2 text-gray-700">
+                    <p class="flex items-center">
+                        <i class="fas fa-envelope text-indigo-600 mr-2"></i>
+                        Email: <span class="text-gray-500 ml-1">Not Available</span>
+                    </p>
+                    <p class="flex items-center">
+                        <i class="fab fa-linkedin text-indigo-600 mr-2"></i>
+                        LinkedIn: <a href="https://www.linkedin.com/in/k-navaneeth-a26993192/" class="text-indigo-600 hover:underline ml-1" target="_blank" rel="noopener noreferrer">View Profile</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Harshala Ranade -->
+        <div id="modal-harshala" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 hidden modal modal-hidden">
+            <div class="bg-white p-8 rounded-lg w-96 max-w-full relative">
+                <button 
+                    class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
+                    onclick="closeModal('harshala')"
+                >
+                    &times;
+                </button>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Harshala Ranade</h3>
+                <p class="text-lg text-gray-600 mb-4">Technical Support</p>
+                <p class="text-sm text-gray-500 mb-4"></p>
+                <div class="mt-4 space-y-2 text-gray-700">
+                    <p class="flex items-center">
+                        <i class="fas fa-envelope text-indigo-600 mr-2"></i>
+                        Email: <span class="text-gray-500 ml-1">Not Available</span>
+                    </p>
+                    <p class="flex items-center">
+                        <i class="fab fa-linkedin text-indigo-600 mr-2"></i>
+                        LinkedIn: <span class="text-gray-500 ml-1">Not Available</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-8 shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-4">IITB Power System Lab</h3>
+                    <p class="text-sm text-gray-300">Advancing the future of power systems through innovation and research.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p class="text-sm text-gray-300">Department of Electrical Engineering</p>
+                    <p class="text-sm text-gray-300">IIT Bombay, Powai</p>
+                    <p class="text-sm text-gray-300">Mumbai 400076, India</p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-envelope mr-2"></i>Email: powersys@iitb.ac.in
+                    </p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-phone mr-2"></i>Phone: +91 22 2159 3505
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="/pslab/index.html" class="hover:text-indigo-300 transition-colors duration-300">Home</a></li>
+                        <li><a href="/pslab/academics/research.html" class="hover:text-indigo-300 transition-colors duration-300">Research</a></li>
+                        <li><a href="/pslab/peoples/faculty.html" class="hover:text-indigo-300 transition-colors duration-300">People</a></li>
+                        <li><a href="/pslab/news.html" class="hover:text-indigo-300 transition-colors duration-300">News</a></li>
+                        <li><a href="/pslab/contact-us.html" class="hover:text-indigo-300 transition-colors duration-300">Contact Us</a></li>
+                        <li><a href="https://voltvault-roan.vercel.app/" class="hover:text-indigo-300 transition-colors duration-300">Voltvault</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@pslab_iitb" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-400 border-t border-indigo-700 pt-4">
+                © 2025 IITB Power System Lab. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+
+        // Modal Handling
+        function openModal(memberId) {
+            const modal = document.getElementById(`modal-${memberId}`);
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('modal-hidden');
+                modal.classList.add('modal-visible');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal(memberId) {
+            const modal = document.getElementById(`modal-${memberId}`);
+            modal.classList.remove('modal-visible');
+            modal.classList.add('modal-hidden');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal on clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    const memberId = modal.id.split('-')[1];
+                    closeModal(memberId);
+                }
+            });
+        });
+
+        // Close modal on pressing Esc key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (!modal.classList.contains('hidden')) {
+                        const memberId = modal.id.split('-')[1];
+                        closeModal(memberId);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

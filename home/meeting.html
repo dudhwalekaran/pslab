@@ -1,0 +1,28 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jitsi Meeting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Jitsi External API Script (loaded in main.js) -->
+  <script src="./meeting.js" defer></script>
+</head>
+<body class="bg-black text-white">
+
+  <!-- Main content container -->
+  <div class="relative h-screen flex flex-col items-center justify-center">
+    <!-- Jitsi Meeting Container -->
+    <div id="jaas-container" class="w-full h-full rounded-lg shadow-lg"></div>
+  </div>
+
+</body>
+</html>

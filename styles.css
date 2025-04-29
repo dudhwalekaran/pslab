@@ -1,0 +1,110 @@
+/* Ensure dropdowns are hidden by default and shown on hover */
+.group-hover\:block {
+    display: none;
+}
+
+/* Show dropdowns on hover for larger screens */
+@media (min-width: 768px) {
+    .group:hover .group-hover\:block {
+        display: block;
+    }
+}
+
+/* Smooth transitions for dropdowns with a slight delay */
+nav ul ul {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition-delay: 0.1s;
+}
+
+/* Remove the gap between parent and dropdown */
+nav ul li.group > a {
+    display: block;
+    padding-bottom: 0.5rem;
+}
+
+/* Ensure the dropdown stays open while hovering over it */
+nav ul li.group:hover > ul,
+nav ul li.group ul:hover {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+/* Add a small top margin to the dropdown to align it better */
+nav ul ul {
+    top: 100%;
+    margin-top: 0.25rem;
+}
+
+/* Ensure navigation items are centered and balanced */
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Rest of your existing styles */
+header img {
+    max-height: 48px;
+    object-fit: contain;
+}
+
+#mobile-menu {
+    transition: all 0.3s ease-in-out;
+}
+
+footer a {
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+nav ul ul {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    transition: background 0.5s ease-in-out;
+}
+
+@media (max-width: 640px) {
+    header h1 {
+        font-size: 1.25rem;
+    }
+    nav ul {
+        space-x-4;
+    }
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+main {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+.animate-fade-in-delayed {
+    animation: fadeIn 1s ease-in-out 0.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

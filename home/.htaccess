@@ -1,0 +1,6 @@
+AddType application/x-httpd-php .html
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} ^/home/.*\.html$
+RewriteCond %{REQUEST_URI} !^/home/proxy\.php$
+RewriteRule ^home/(.*)$ home_router.php?file=$1 [L,QSA]

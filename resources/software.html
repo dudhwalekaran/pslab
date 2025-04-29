@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Softwares - IITB Power System Lab</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white sticky top-0 z-50 shadow-lg"
+    >
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold tracking-tight">
+            IITB Power System Lab
+          </h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="hidden md:block">
+          <ul class="flex space-x-8 px-6">
+            <li>
+              <a
+                href="../index.html"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Home</a
+              >
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Academics/Research</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Academics & Research
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/subjects.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Subjects</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/research.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Research</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/current-research.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Current Research</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/explore-projects.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Explore Projects</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Laboratory Facilities</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Facilities
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Power Systems Lab</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Resources</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Resources
+                </li>
+                <li>
+                  <a
+                    href="/pslab/resources/library.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Library</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/resources/software.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Software</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/resources/educational-videos.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Educational Videos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://mkdocs-three.vercel.app/"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Educational Content</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >People</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Our Team
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/faculty.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Faculty</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/students.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Students</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/alumni.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Alumni</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/staff.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Staff</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="../news.html"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >News</a
+              >
+            </li>
+            <li>
+              <a
+                href="../login.html"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Login</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <!-- IITB Logo -->
+        <div
+          class="transform hover:scale-105 transition-transform duration-300 ml-4"
+        >
+          <img src="../public/iitb.png" alt="IITB Logo" class="h-12" />
+        </div>
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+      </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+        <ul class="flex flex-col space-y-4 p-4">
+          <li><a href="../index.html" class="block py-2">Home</a></li>
+          <li>
+            <a href="#" class="block py-2">Academics/Research</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">
+                Academics & Research
+              </li>
+              <li>
+                <a href="/pslab/academics/subjects.html" class="block py-1"
+                  >Subjects</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/academics/research.html" class="block py-1"
+                  >Research</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/academics/current-research.html"
+                  class="block py-1"
+                  >Current Research</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/academics/explore-projects.html"
+                  class="block py-1"
+                  >Explore Projects</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="block py-2">Laboratory Facilities</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">Facilities</li>
+              <li><a href="#" class="block py-1">Power Systems Lab</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="block py-2">Resources</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">Resources</li>
+              <li>
+                <a href="/pslab/resources/library.html" class="block py-1"
+                  >Library</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/resources/software.html" class="block py-1"
+                  >Software</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/resources/educational-videos.html"
+                  class="block py-1"
+                  >Educational Videos w</a
+                >
+              </li>
+              <li>
+                <a href="https://mkdocs-three.vercel.app/" class="block py-1"
+                  >Educational Content</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="block py-2">People</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">Our Team</li>
+              <li>
+                <a href="/pslab/peoples/faculty.html" class="block py-1"
+                  >Faculty</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/peoples/students.html" class="block py-1"
+                  >Students</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/peoples/alumni.html" class="block py-1"
+                  >Alumni</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/peoples/staff.html" class="block py-1">Staff</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="../news.html" class="block py-2">News</a>
+          </li>
+          <li><a href="../login.html" class="block py-2">Login</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <!-- In celebrado Software Section -->
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">
+            IITB In-House Built Software
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Sequel -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <i class="fas fa-microchip text-indigo-600 text-4xl mb-4"></i>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Sequel</h3>
+              <p class="text-gray-600 mb-4">
+                SEQUEL is a general-purpose circuit simulation package developed
+                at IIT Bombay. It provides a GUI for schematic entry and
+                plotting. Several simulation examples in electronics and power
+                electronics, particularly suitable for teaching engineering
+                courses, are included in the package.
+              </p>
+              <a
+                href="https://www.ee.iitb.ac.in/~microel/faculty/mbp/sequel1.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- PMU Simulator -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <i
+                class="fas fa-tachometer-alt text-indigo-600 text-4xl mb-4"
+              ></i>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                PMU Simulator
+              </h3>
+              <p class="text-gray-600 mb-4">
+                PMU Simulator is a tool developed at IIT Bombay for simulating
+                Phasor Measurement Units (PMUs). It helps in testing and
+                validating PMU algorithms for real-time monitoring and control
+                of power systems.
+              </p>
+              <a
+                href="https://www.ee.iitb.ac.in/~microel/faculty/mbp/sequel1.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- IPDC -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <i class="fas fa-network-wired text-indigo-600 text-4xl mb-4"></i>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">IPDC</h3>
+              <p class="text-gray-600 mb-4">
+                IPDC (Integrated Power Distribution Controller) is a software
+                solution developed at IIT Bombay for managing and optimizing
+                power distribution networks, ensuring efficient energy delivery
+                and grid stability.
+              </p>
+              <a
+                href="https://www.ee.iitb.ac.in/~microel/faculty/mbp/sequel1.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+          </div>
+
+          <!-- Download Section -->
+          <div class="flex justify-center items-center mt-12">
+            <div class="text-center">
+              <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                Download Transient stability code File
+              </h3>
+              <a
+                href="/pslab/Power_Flow.zip"
+                download
+                class="inline-block bg-indigo-600 text-white py-2 px-6 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Click to Download Zip File
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Free Software Section -->
+      <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">
+            Free Software for Research and Engineering
+          </h2>
+          <p class="text-lg text-center mb-12 text-gray-600 max-w-3xl mx-auto">
+            Here are some of the most widely used free software tools for
+            electrical engineering, research, and programming. These tools are
+            essential for simulations, data analysis, and coding tasks.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- GNU Octave -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/gnu.png"
+                alt="GNU Octave Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                GNU Octave
+              </h3>
+              <p class="text-gray-600 mb-4">
+                A free, open-source software for numerical computations, useful
+                for matrix operations, data analysis, and simulations.
+              </p>
+              <a
+                href="https://www.gnu.org/software/octave/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- Scilab -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/scilab.png"
+                alt="Scilab Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Scilab</h3>
+              <p class="text-gray-600 mb-4">
+                A powerful open-source software for engineering and scientific
+                applications, with tools for simulation and numerical
+                computations.
+              </p>
+              <a
+                href="https://www.scilab.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- Linux -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"
+                alt="Linux Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Linux</h3>
+              <p class="text-gray-600 mb-4">
+                An open-source operating system used for development, research,
+                and running simulations in a variety of fields, including
+                electrical engineering.
+              </p>
+              <a
+                href="https://www.linux.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- Python -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+                alt="Python Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Python</h3>
+              <p class="text-gray-600 mb-4">
+                A versatile programming language widely used in data analysis,
+                machine learning, scientific computing, and automation.
+              </p>
+              <a
+                href="https://www.python.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- ATPDraw -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/atpdraw.png"
+                alt="ATPDraw Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">ATPDraw</h3>
+              <p class="text-gray-600 mb-4">
+                A software tool for simulation and analysis of electrical power
+                systems, particularly for transient stability studies.
+              </p>
+              <a
+                href="https://www.atpdraw.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- Xournal -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/xournal.png"
+                alt="Xournal Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Xournal</h3>
+              <p class="text-gray-600 mb-4">
+                A free and open-source application for note-taking and PDF
+                annotation, useful for documenting research and engineering
+                projects.
+              </p>
+              <a
+                href="https://xournalpp.github.io/installation/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- LTspice -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/ltspcie.png"
+                alt="LTspice Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">LTspice</h3>
+              <p class="text-gray-600 mb-4">
+                LTspice is a powerful, free simulation software used for circuit
+                design and analysis. It allows engineers to model analog and
+                digital circuits with accurate simulations.
+              </p>
+              <a
+                href="https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- LibreOffice -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/libre.png"
+                alt="LibreOffice Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                LibreOffice
+              </h3>
+              <p class="text-gray-600 mb-4">
+                LibreOffice is a free, open-source office suite that includes
+                tools for word processing, spreadsheets, presentations, and
+                more. It’s compatible with major document formats.
+              </p>
+              <a
+                href="https://www.libreoffice.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- QSpice -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/qspice.jpg"
+                alt="QSpice Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">QSpice</h3>
+              <p class="text-gray-600 mb-4">
+                QSpice is an open-source circuit simulation software used for
+                analog and mixed-signal circuit analysis, offering real-time
+                feedback and waveform analysis.
+              </p>
+              <a
+                href="https://www.qorvo.com/design-hub/design-tools/interactive/qspice"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- Overleaf -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/overlead.jpg"
+                alt="Overleaf Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Overleaf</h3>
+              <p class="text-gray-600 mb-4">
+                Overleaf is a online LaTeX editor that allows users to write,
+                edit, and collaborate on scientific documents in real-time,
+                widely used in academia.
+              </p>
+              <a
+                href="https://www.overleaf.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- MATLAB -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/matlab.jpg"
+                alt="MATLAB Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">MATLAB</h3>
+              <p class="text-gray-600 mb-4">
+                MATLAB combines a desktop environment tuned for iterative
+                analysis and design processes with a programming language that
+                expresses matrix and array mathematics directly.
+              </p>
+              <a
+                href="https://www.mathworks.com/products/matlab.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+
+            <!-- PSCAD -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 text-center"
+            >
+              <img
+                src="../public/software/pscad.jpg"
+                alt="PSCAD Logo"
+                class="w-24 h-24 mx-auto mb-4"
+              />
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">PSCAD</h3>
+              <p class="text-gray-600 mb-4">
+                PSCAD (Power Systems Computer Aided Design) is a software tool
+                used for simulating and analyzing electrical power systems,
+                including transient and dynamic behaviors.
+              </p>
+              <a
+                href="https://www.pscad.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Visit Website
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-8 shadow-inner"
+    >
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div
+            class="transform hover:scale-105 transition-transform duration-300"
+          >
+            <h3 class="text-lg font-semibold mb-4">IITB Power System Lab</h3>
+            <p class="text-sm text-gray-300">
+              Advancing the future of power systems through innovation and
+              research.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+            <p class="text-sm text-gray-300">
+              Department of Electrical Engineering
+            </p>
+            <p class="text-sm text-gray-300">IIT Bombay, Powai</p>
+            <p class="text-sm text-gray-300">Mumbai 400076, India</p>
+            <p class="text-sm text-gray-300 mt-2">
+              <i class="fas fa-envelope mr-2"></i>Email: powersys@iitb.ac.in
+            </p>
+            <p class="text-sm text-gray-300 mt-2">
+              <i class="fas fa-phone mr-2"></i>Phone: +91 22 2159 3505
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li>
+                <a
+                  href="/pslab/index.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/academics/research.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >Research</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/peoples/faculty.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >People</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/news.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >News</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/contact-us.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >Contact Us</a
+                >
+              </li>
+              <li><a href="https://voltvault-roan.vercel.app/" class="hover:text-indigo-300 transition-colors duration-300">Voltvault</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+            <div class="flex space-x-4">
+              <a
+                href="https://www.youtube.com/@pslab_iitb"
+                class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300"
+              >
+                <i class="fab fa-youtube text-xl"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300"
+              >
+                <i class="fab fa-github text-xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 text-center text-sm text-gray-400 border-t border-indigo-700 pt-4"
+        >
+          © 2025 IITB Power System Lab. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

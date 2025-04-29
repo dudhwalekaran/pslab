@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Videos - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom scrollbar hide for playlist tabs */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Loading spinner animation */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold tracking-tight">IITB Power System Lab</h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 px-6">
+                    <li><a href="../index.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Home</a></li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Academics/Research</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Academics & Research</li>
+                            <li><a href="/pslab/academics/subjects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Subjects</a></li>
+                            <li><a href="/pslab/academics/research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Research</a></li>
+                            <li><a href="/pslab/academics/current-research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Current Research</a></li>
+                            <li><a href="/pslab/academics/explore-projects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Explore Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Laboratory Facilities</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Facilities</li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Power Systems Lab</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Resources</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Resources</li>
+                            <li><a href="/pslab/resources/library.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Library</a></li>
+                            <li><a href="/pslab/resources/software.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Software</a></li>
+                            <li><a href="/pslab/resources/educational-videos.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Videos</a></li>
+                            <li><a href="https://mkdocs-three.vercel.app/" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Content</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">People</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Our Team</li>
+                            <li><a href="/pslab/peoples/faculty.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Faculty</a></li>
+                            <li><a href="/pslab/peoples/students.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Students</a></li>
+                            <li><a href="/pslab/peoples/alumni.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Alumni</a></li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Staff</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="../news.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">News</a>
+                    </li>
+                    <li><a href="../login.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Login</a></li>
+                </ul>
+            </nav>
+
+            <!-- IITB Logo -->
+            <div class="transform hover:scale-105 transition-transform duration-300 ml-4">
+                <img src="../public/iitb.png" alt="IITB Logo" class="h-12">
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+            <ul class="flex flex-col space-y-4 p-4">
+                <li><a href="/index.html" class="block py-2">Home</a></li>
+                <li>
+                    <a href="#" class="block py-2">Academics/Research</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Academics & Research</li>
+                        <li><a href="/pslab/academics/subjects.html" class="block py-1">Subjects</a></li>
+                        <li><a href="/pslab/academics/research.html" class="block py-1">Research</a></li>
+                        <li><a href="/pslab/academics/current-research.html" class="block py-1">Current Research</a></li>
+                        <li><a href="/pslab/academics/explore-projects.html" class="block py-1">Explore Projects</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Laboratory Facilities</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Facilities</li>
+                        <li><a href="#" class="block py-1">Power Systems Lab</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Resources</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Resources</li>
+                        <li><a href="/pslab/resources/library.html" class="block py-1">Library</a></li>
+                        <li><a href="/pslab/resources/software.html" class="block py-1">Software</a></li>
+                        <li><a href="/pslab/resources/educational-videos.html" class="block py-1">Educational Videos</a></li>
+                        <li><a href="https://mkdocs-three.vercel.app/" class="block py-1">Educational Content</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">People</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Our Team</li>
+                        <li><a href="/pslab/peoples/faculty.html" class="block py-1">Faculty</a></li>
+                        <li><a href="/pslab/peoples/students.html" class="block py-1">Students</a></li>
+                        <li><a href="/pslab/peoples/alumni.html" class="block py-1">Alumni</a></li>
+                        <li><a href="/pslab/peoples/staff.html" class="block py-1">Staff</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../news.html" class="block py-2">News</a>
+                </li>
+                <li><a href="../login.html" class="block py-2">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+
+        <!-- Video Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">Video Lectures / Tutorials</h2>
+
+                <!-- Loading/Error States -->
+                <div id="loading" class="text-center text-gray-500 hidden">
+                    <div class="spinner"></div>
+                    <p class="mt-2">Loading videos...</p>
+                </div>
+                <p id="error" class="text-center text-red-500 hidden"></p>
+                <p id="no-videos" class="text-center text-gray-500 hidden">No videos found.</p>
+
+                <!-- Playlist Tabs -->
+                <div id="playlist-tabs-container" class="mb-6 hidden">
+                    <div id="playlist-tabs" class="flex space-x-4 overflow-x-auto scrollbar-hide" style="max-width: 100%; scroll-behavior: smooth;">
+                        <!-- Tabs will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Video List -->
+                <div id="video-list" class="bg-white p-6 rounded-lg shadow-xl hidden">
+                    <ul id="video-items" class="space-y-4">
+                        <!-- Videos will be populated by JavaScript -->
+                    </ul>
+                </div>
+
+                <!-- Pagination Controls -->
+                <div id="pagination" class="flex justify-between mt-6 hidden">
+                    <button id="prev-btn" class="px-6 py-3 rounded-lg font-medium text-lg transition-all ease-in-out duration-300 bg-gray-300 text-gray-500 cursor-not-allowed">
+                        Previous
+                    </button>
+                    <button id="next-btn" class="px-6 py-3 rounded-lg font-medium text-lg transition-all ease-in-out duration-300 bg-indigo-600 text-white">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-8 shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-4">IITB Power System Lab</h3>
+                    <p class="text-sm text-gray-300">Advancing the future of power systems through innovation and research.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p class="text-sm text-gray-300">Department of Electrical Engineering</p>
+                    <p class="text-sm text-gray-300">IIT Bombay, Powai</p>
+                    <p class="text-sm text-gray-300">Mumbai 400076, India</p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-envelope mr-2"></i>Email: powersys@iitb.ac.in
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="/pslab/index.html" class="hover:text-indigo-300 transition-colors duration-300">Home</a></li>
+                        <li><a href="/pslab/academics/research.html" class="hover:text-indigo-300 transition-colors duration-300">Research</a></li>
+                        <li><a href="/pslab/peoples/faculty.html" class="hover:text-indigo-300 transition-colors duration-300">People</a></li>
+                        <li><a href="/pslab/news.html" class="hover:text-indigo-300 transition-colors duration-300">News</a></li>
+                        <li><a href="/pslab/contact-us.html" class="hover:text-indigo-300 transition-colors duration-300">Contact Us</a></li>
+                        <li><a href="https://voltvault-roan.vercel.app/" class="hover:text-indigo-300 transition-colors duration-300">Voltvault</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@pslab_iitb" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-400 border-t border-indigo-700 pt-4">
+                © 2025 IITB Power System Lab. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // State variables
+        let videos = [];
+        let playlists = [];
+        let selectedPlaylist = "";
+        let currentIndex = 0;
+        let videosPerPage = 0; // Will be calculated dynamically
+
+        // DOM elements
+        const loadingDiv = document.getElementById('loading');
+        const errorDiv = document.getElementById('error');
+        const noVideosDiv = document.getElementById('no-videos');
+        const playlistTabsContainer = document.getElementById('playlist-tabs-container');
+        const playlistTabs = document.getElementById('playlist-tabs');
+        const videoList = document.getElementById('video-list');
+        const videoItems = document.getElementById('video-items');
+        const paginationDiv = document.getElementById('pagination');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Playlist name mapping
+        const playlistNameMapping = {
+            "ARPIT Videos": "Fundamentals of Electrical Engineering",
+        };
+
+        // Function to calculate videos per page based on screen height
+        function calculateVideosPerPage() {
+            const viewportHeight = window.innerHeight;
+            const videoItemHeight = 60; // Approximate height of each video item (adjust based on your CSS)
+            const headerFooterHeight = 200; // Approximate height of header, footer, and padding (adjust as needed)
+            const availableHeight = viewportHeight - headerFooterHeight;
+            const videosToShow = Math.floor(availableHeight / videoItemHeight);
+            return Math.max(1, videosToShow); // Ensure at least 1 video is shown
+        }
+
+        // Update videosPerPage on window resize
+        window.addEventListener('resize', () => {
+            videosPerPage = calculateVideosPerPage();
+            renderVideos();
+        });
+
+        // Fetch videos from Google Spreadsheet
+        async function fetchVideos() {
+            try {
+                loadingDiv.classList.remove('hidden');
+                errorDiv.classList.add('hidden');
+                noVideosDiv.classList.add('hidden');
+                playlistTabsContainer.classList.add('hidden');
+                videoList.classList.add('hidden');
+                paginationDiv.classList.add('hidden');
+
+                const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWaNFbc3Ncw2SoF369bSlMls2xSFW08EbQL1CAX0Mv3rzXyGSZ3_t8YkBmZ7nsKGv9uTKzW3cAXA42/pub?output=csv";
+                const response = await fetch(sheetUrl);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                const text = await response.text();
+                const rows = text.split("\n").slice(1); // Skip header row
+
+                // Parse CSV data
+                const parseCSV = (row) =>
+                    row
+                        .match(/(?:\"([^\"]+)\")|([^,]+)/g)
+                        ?.map((col) => col.replace(/\"/g, "").trim()) || [];
+
+                const videoData = rows
+                    .map((row) => {
+                        const columns = parseCSV(row);
+                        if (columns.length < 3) return null;
+                        return {
+                            playlist: columns[0] || "Unknown Playlist",
+                            title: columns[1] || "No Title",
+                            link: columns[2] || "#",
+                        };
+                    })
+                    .filter(Boolean);
+
+                if (videoData.length === 0) throw new Error("No valid videos found in the sheet");
+
+                videos = videoData;
+                playlists = [...new Set(videoData.map((video) => video.playlist))];
+                selectedPlaylist = playlists[0] || "";
+                videosPerPage = calculateVideosPerPage(); // Calculate initial videos per page
+
+                renderTabs();
+                renderVideos();
+
+                // Show content
+                playlistTabsContainer.classList.remove('hidden');
+                videoList.classList.remove('hidden');
+            } catch (error) {
+                console.error("Fetch error:", error);
+                errorDiv.textContent = `Error: ${error.message}`;
+                errorDiv.classList.remove('hidden');
+            } finally {
+                loadingDiv.classList.add('hidden');
+            }
+        }
+
+        // Render playlist tabs
+        function renderTabs() {
+            playlistTabs.innerHTML = '';
+            playlists.forEach(playlist => {
+                const button = document.createElement('button');
+                button.className = `flex-shrink-0 px-6 py-3 text-lg rounded-lg transition-all ease-in-out duration-300 font-medium ${
+                    selectedPlaylist === playlist ? 'bg-indigo-600 text-white shadow-lg' : 'bg-gray-200 text-gray-700 hover:bg-indigo-500 hover:text-white'
+                }`;
+                button.style.minWidth = 'calc(20% - 1rem)';
+                button.textContent = playlistNameMapping[playlist] || playlist;
+                button.addEventListener('click', () => {
+                    selectedPlaylist = playlist;
+                    currentIndex = 0;
+                    renderTabs();
+                    renderVideos();
+                });
+                playlistTabs.appendChild(button);
+            });
+        }
+
+        // Render videos
+        function renderVideos() {
+            const filteredVideos = videos.filter(video => video.playlist === selectedPlaylist);
+            const paginatedVideos = filteredVideos.slice(currentIndex, currentIndex + videosPerPage);
+
+            // Update video list
+            videoItems.innerHTML = '';
+            if (filteredVideos.length === 0) {
+                noVideosDiv.classList.remove('hidden');
+                paginationDiv.classList.add('hidden');
+                return;
+            }
+
+            paginatedVideos.forEach(video => {
+                const li = document.createElement('li');
+                li.className = 'transition-all ease-in-out duration-300 transform hover:scale-105';
+                li.innerHTML = `
+                    <a href="${video.link}" target="_blank" rel="noopener noreferrer" class="text-lg text-indigo-600 hover:text-indigo-800 hover:underline flex items-center">
+                        <i class="fas fa-play-circle text-indigo-600 mr-2"></i> ${video.title}
+                    </a>
+                `;
+                videoItems.appendChild(li);
+            });
+
+            // Show/hide pagination based on the number of videos
+            if (filteredVideos.length <= videosPerPage) {
+                paginationDiv.classList.add('hidden');
+            } else {
+                paginationDiv.classList.remove('hidden');
+                // Update pagination buttons
+                prevBtn.disabled = currentIndex === 0;
+                prevBtn.className = `px-6 py-3 rounded-lg font-medium text-lg transition-all ease-in-out duration-300 ${
+                    currentIndex === 0 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-indigo-600 text-white'
+                }`;
+
+                nextBtn.disabled = currentIndex + videosPerPage >= filteredVideos.length;
+                nextBtn.className = `px-6 py-3 rounded-lg font-medium text-lg transition-all ease-in-out duration-300 ${
+                    currentIndex + videosPerPage >= filteredVideos.length ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-indigo-600 text-white'
+                }`;
+            }
+        }
+
+        // Pagination button event listeners
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex = Math.max(0, currentIndex - videosPerPage);
+                renderVideos();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            const filteredVideos = videos.filter(video => video.playlist === selectedPlaylist);
+            if (currentIndex + videosPerPage < filteredVideos.length) {
+                currentIndex = Math.min(filteredVideos.length - 1, currentIndex + videosPerPage);
+                renderVideos();
+            }
+        });
+
+        // Fetch videos on page load
+        fetchVideos();
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

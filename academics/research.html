@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold tracking-tight">IITB Power System Lab</h1>
+            </div>
+            <!-- Navigation, IITB Logo, Mobile Menu Button (unchanged) -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 px-6">
+                    <li><a href="../index.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Home</a></li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Academics/Research</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Academics & Research</li>
+                            <li><a href="/pslab/academics/subjects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Subjects</a></li>
+                            <li><a href="/pslab/academics/research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Research</a></li>
+                            <li><a href="/pslab/academics/current-research.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Current Research</a></li>
+                            <li><a href="/pslab/academics/explore-projects.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Explore Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Laboratory Facilities</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Facilities</li>
+                            <li><a href="#" class="block px-4 py-2 hover:bg-indigo-700 rounded">Power Systems Lab</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">Resources</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Resources</li>
+                            <li><a href="/pslab/resources/library.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Library</a></li>
+                            <li><a href="/pslab/resources/software.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Software</a></li>
+                            <li><a href="/pslab/resources/educational-videos.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Videos</a></li>
+                            <li><a href="https://mkdocs-three.vercel.app/" class="block px-4 py-2 hover:bg-indigo-700 rounded">Educational Content</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="#" class="hover:text-indigo-300 transition-colors duration-300 py-2">People</a>
+                        <ul class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48">
+                            <li class="text-sm font-semibold text-gray-300 mb-2">Our Team</li>
+                            <li><a href="/pslab/peoples/faculty.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Faculty</a></li>
+                            <li><a href="/pslab/peoples/students.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Students</a></li>
+                            <li><a href="/pslab/peoples/alumni.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Alumni</a></li>
+                            <li><a href="/pslab/peoples/staff.html" class="block px-4 py-2 hover:bg-indigo-700 rounded">Staff</a></li>
+                        </ul>
+                    </li>
+                    <li class="relative group">
+                        <a href="../news.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">News</a>
+                    </li>
+                    <li><a href="../login.html" class="hover:text-indigo-300 transition-colors duration-300 py-2">Login</a></li>
+                </ul>
+            </nav>
+            <div class="transform hover:scale-105 transition-transform duration-300 ml-4">
+                <img src="../public/iitb.png" alt="IITB Logo" class="h-12">
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+            <ul class="flex flex-col space-y-4 p-4">
+                <li><a href="../index.html" class="block py-2">Home</a></li>
+                <li>
+                    <a href="#" class="block py-2">Academics/Research</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Academics & Research</li>
+                        <li><a href="/pslab/academics/subjects.html" class="block py-1">Subject</a></li>
+                        <li><a href="/pslab/academics/research.html" class="block py-1">Research</a></li>
+                        <li><a href="/pslab/academics/current-research.html" class="block py-1">Current Research</a></li>
+                        <li><a href="/pslab/academics/explore-projects.html" class="block py-1">Explore Projects</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Laboratory Facilities</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Facilities</li>
+                        <li><a href="#" class="block py-1">Power Systems Lab</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">Resources</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Resources</li>
+                        <li><a href="/pslab/resources/library.html" class="block py-1">Library</a></li>
+                        <li><a href="/pslab/resources/software.html" class="block py-1">Software</a></li>
+                        <li><a href="/pslab/resources/educational-videos.html" class="block py-1">Educational Videos</a></li>
+                        <li><a href="https://mkdocs-three.vercel.app/" class="block py-1">Educational Content</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block py-2">People</a>
+                    <ul class="pl-4 space-y-2">
+                        <li class="text-sm font-semibold text-gray-300">Our Team</li>
+                        <li><a href="/pslab/peoples/faculty.html" class="block py-1">Faculty</a></li>
+                        <li><a href="/pslab/peoples/students.html" class="block py-1">Students</a></li>
+                        <li><a href="/pslab/peoples/alumni.html" class="block py-1">Alumni</a></li>
+                        <li><a href="/pslab/peoples/staff.html" class="block py-1">Staff</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../news.html" class="block py-2">News</a>
+                </li>
+                <li><a href="../login.html" class="block py-2">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content (unchanged) -->
+    <main class="flex-grow">
+        <!-- Research Overview Section (unchanged) -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Research Initiatives</h2>
+                <p class="text-lg max-w-4xl mx-auto mb-6 text-gray-600">
+                    The IITB Power System Lab is at the forefront of innovation in electrical engineering, focusing on stability, control, and optimization of power systems. Explore our research thesis to learn more about our contributions to the field.
+                </p>
+            </div>
+        </section>
+
+        <!-- Research Topics Section (unchanged) -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore Research Thesis</h2>
+                <div id="research-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Stability Analysis -->
+                    <div class="relative bg-white rounded-lg shadow-lg overflow-hidden transform hover:shadow-xl hover:scale-105 transition-all duration-300">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-chart-line text-indigo-600 mr-2"></i> Stability Analysis and Design of Wide Area Damping Controllers
+                            </h3>
+                            <p class="text-gray-600 mb-4">
+                                Kevin Gajjar, Guide: A M Kulkarni
+                            </p>
+                            <a
+                                href="https://shodhganga.inflibnet.ac.in/handle/10603/609476"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-300"
+                            >
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- EMT Companion Circuit -->
+                    <div class="relative bg-white rounded-lg shadow-lg overflow-hidden transform hover:shadow-xl hover:scale-105 transition-all duration-300">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-bolt text-indigo-600 mr-2"></i> EMT Companion Circuit Based Approach for Eigenanalysis
+                            </h3>
+                            <p class="text-gray-600 mb-4">
+                                Vinay T S Chindu, Guide: A M Kulkarni
+                            </p>
+                            <a
+                                href="https://shodhganga.inflibnet.ac.in/handle/10603/611032"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-300"
+                            >
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Passivity Based Stability -->
+                    <div class="relative bg-white rounded-lg shadow-lg overflow-hidden transform hover:shadow-xl hover:scale-105 transition-all duration-300">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                                <i class="fas fa-shield-alt text-indigo-600 mr-2"></i> Passivity Based Decentralized Small Signal Stability Criteria
+                            </h3>
+                            <p class="text-gray-600 mb-4">
+                                Kaustav Dey, Guide: A M Kulkarni
+                            </p>
+                            <a
+                                href="https://shodhganga.inflibnet.ac.in/handle/10603/443781#"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-300"
+                            >
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (unchanged) -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-8 shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-4">IITB Power System Lab</h3>
+                    <p class="text-sm text-gray-300">Advancing the future of power systems through innovation and research.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p class="text-sm text-gray-300">Department of Electrical Engineering</p>
+                    <p class="text-sm text-gray-300">IIT Bombay, Powai</p>
+                    <p class="text-sm text-gray-300">Mumbai 400076, India</p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-envelope mr-2"></i>Email: powersys@iitb.ac.in
+                    </p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        <i class="fas fa-phone mr-2"></i>Phone: +91 22 2159 3505
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="/pslab/index.html" class="hover:text-indigo-300 transition-colors duration-300">Home</a></li>
+                        <li><a href="/pslab/academics/research.html" class="hover:text-indigo-300 transition-colors duration-300">Research</a></li>
+                        <li><a href="/pslab/peoples/faculty.html" class="hover:text-indigo-300 transition-colors duration-300">People</a></li>
+                        <li><a href="/pslab/news.html" class="hover:text-indigo-300 transition-colors duration-300">News</a></li>
+                        <li><a href="/pslab/contact-us.html" class="hover:text-indigo-300 transition-colors duration-300">Contact Us</a></li>
+                        <li><a href="https://voltvault-roan.vercel.app/" class="hover:text-indigo-300 transition-colors duration-300">Voltvault</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@pslab_iitb" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-400 border-t border-indigo-700 pt-4">
+                © 2025 IITB Power System Lab. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button (added) -->
+    <button id="back-to-top" class="hidden fixed bottom-6 right-6 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../script.js"></script>
+    <script>
+        // Ensure DOM is loaded before running scripts
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Back to Top Button
+            const backToTopButton = document.getElementById('back-to-top');
+            if (backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.remove('hidden');
+                    } else {
+                        backToTopButton.classList.add('hidden');
+                    }
+                });
+
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Fetch Thesis Data from Google Spreadsheet and append to the grid
+            fetch('research_proxy.php?type=Thesis', {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const researchGrid = document.getElementById('research-grid');
+                if (researchGrid && Array.isArray(data)) {
+                    data.forEach(item => {
+                        const thesisItem = document.createElement('div');
+                        thesisItem.className = 'relative bg-white rounded-lg shadow-lg overflow-hidden transform hover:shadow-xl hover:scale-105 transition-all duration-300';
+                        thesisItem.innerHTML = `
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                                    <i class="fas fa-book text-indigo-600 mr-2"></i> ${item.title || 'Untitled Thesis'}
+                                </h3>
+                                <p class="text-gray-600 mb-4">Author: ${item.author || 'Unknown'}</p>
+                                <a href="${item.link || '#'}"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-300">
+                                   Read More
+                                </a>
+                            </div>
+                        `;
+                        researchGrid.appendChild(thesisItem);
+                    });
+                } else {
+                    console.error('Research grid or data is invalid');
+                }
+            })
+            .catch(error => console.error('Error fetching thesis:', error));
+        });
+    </script>
+</body>
+</html>
+</html>

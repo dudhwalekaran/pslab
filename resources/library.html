@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Educational Resources - IITB Power System Lab</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white sticky top-0 z-50 shadow-lg"
+    >
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold tracking-tight">
+            IITB Power System Lab
+          </h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="hidden md:block">
+          <ul class="flex space-x-8 px-6">
+            <li>
+              <a
+                href="../index.html"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Home</a
+              >
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Academics/Research</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Academics & Research
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/subjects.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Subjects</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/research.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Research</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/current-research.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Current Research</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/academics/explore-projects.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Explore Projects</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Laboratory Facilities</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Facilities
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Power Systems Lab</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Resources</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Resources
+                </li>
+                <li>
+                  <a
+                    href="/pslab/resources/library.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Library</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/resources/software.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Software</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/resources/educational-videos.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Educational Videos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://mkdocs-three.vercel.app/"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Educational Content</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="#"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >People</a
+              >
+              <ul
+                class="absolute left-0 hidden group-hover:block bg-indigo-800 text-white p-4 rounded-lg shadow-xl transform translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 w-48"
+              >
+                <li class="text-sm font-semibold text-gray-300 mb-2">
+                  Our Team
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/faculty.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Faculty</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/students.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Students</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/alumni.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Alumni</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/pslab/peoples/staff.html"
+                    class="block px-4 py-2 hover:bg-indigo-700 rounded"
+                    >Staff</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="relative group">
+              <a
+                href="../news.html"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >News</a
+              >
+            </li>
+            <li>
+              <a
+                href="../login.html"
+                class="hover:text-indigo-300 transition-colors duration-300 py-2"
+                >Login</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <!-- IITB Logo -->
+        <div
+          class="transform hover:scale-105 transition-transform duration-300 ml-4"
+        >
+          <img src="../public/iitb.png" alt="IITB Logo" class="h-12" />
+        </div>
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+      </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+        <ul class="flex flex-col space-y-4 p-4">
+          <li><a href="../index.html" class="block py-2">Home</a></li>
+          <li>
+            <a href="#" class="block py-2">Academics/Research</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">
+                Academics & Research
+              </li>
+              <li>
+                <a href="/pslab/academics/subjects.html" class="block py-1"
+                  >Subjects</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/academics/research.html" class="block py-1"
+                  >Research</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/academics/current-research.html"
+                  class="block py-1"
+                  >Current Research</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/academics/explore-projects.html"
+                  class="block py-1"
+                  >Explore Projects</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="block py-2">Laboratory Facilities</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">Facilities</li>
+              <li><a href="#" class="block py-1">Power Systems Lab</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="block py-2">Resources</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">Resources</li>
+              <li>
+                <a href="/pslab/resources/library.html" class="block py-1"
+                  >Library</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/resources/software.html" class="block py-1"
+                  >Software</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/resources/educational-videos.html"
+                  class="block py-1"
+                  >Educational Videos</a
+                >
+              </li>
+              <li>
+                <a href="https://mkdocs-three.vercel.app/" class="block py-1"
+                  >Educational Content</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="block py-2">People</a>
+            <ul class="pl-4 space-y-2">
+              <li class="text-sm font-semibold text-gray-300">Our Team</li>
+              <li>
+                <a href="/pslab/peoples/faculty.html" class="block py-1"
+                  >Faculty</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/peoples/students.html" class="block py-1"
+                  >Students</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/peoples/alumni.html" class="block py-1"
+                  >Alumni</a
+                >
+              </li>
+              <li>
+                <a href="/pslab/peoples/staff.html" class="block py-1">Staff</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="../news.html" class="block py-2">News</a>
+          </li>
+          <li><a href="../login.html" class="block py-2">Login</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-8">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">
+          Educational Resources
+        </h2>
+
+        <!-- Search Bar -->
+        <div class="mb-6 max-w-2xl mx-auto">
+          <input
+            type="text"
+            id="searchFilter"
+            placeholder="Search by title, author, or subject..."
+            class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            oninput="filterResources()"
+          />
+        </div>
+
+        <!-- Resource Table -->
+        <div id="resourceTable" class="overflow-x-auto">
+          <table class="w-full bg-white shadow-md rounded-lg">
+            <thead class="bg-indigo-600 text-white">
+              <tr>
+                <th class="py-3 px-4 text-left">Title</th>
+                <th class="py-3 px-4 text-left">Author</th>
+                <th class="py-3 px-4 text-left">Subject</th>
+                <th class="py-3 px-4 text-left">Edition</th>
+              </tr>
+            </thead>
+            <tbody id="resourceTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-8 shadow-inner"
+    >
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div
+            class="transform hover:scale-105 transition-transform duration-300"
+          >
+            <h3 class="text-lg font-semibold mb-4">IITB Power System Lab</h3>
+            <p class="text-sm text-gray-300">
+              Advancing the future of power systems through innovation and
+              research.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+            <p class="text-sm text-gray-300">
+              Department of Electrical Engineering
+            </p>
+            <p class="text-sm text-gray-300">IIT Bombay, Powai</p>
+            <p class="text-sm text-gray-300">Mumbai 400076, India</p>
+            <p class="text-sm text-gray-300 mt-2">
+              <i class="fas fa-envelope mr-2"></i>Email: powersys@iitb.ac.in
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li>
+                <a
+                  href="../index.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/academics/research.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >Research</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/peoples/faculty.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >People</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/news.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >News</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/pslab/contact-us.html"
+                  class="hover:text-indigo-300 transition-colors duration-300"
+                  >Contact Us</a
+                >
+              </li>
+              <li><a href="https://voltvault-roan.vercel.app/" class="hover:text-indigo-300 transition-colors duration-300">Voltvault</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+            <div class="flex space-x-4">
+              <a
+                href="https://www.youtube.com/@pslab_iitb"
+                class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300"
+              >
+                <i class="fab fa-youtube text-xl"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-300 hover:text-indigo-300 transform hover:scale-110 transition-all duration-300"
+              >
+                <i class="fab fa-github text-xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      google.charts.load("current", { packages: ["table"] });
+      google.charts.setOnLoadCallback(loadResources);
+
+      let allResources = [];
+
+      function loadResources() {
+        const sheetID = "1K7yfH8zdExv7vUWj_Pg1iL798jaH2M8SKd9ik73-O1I"; // Replace with your actual Sheet ID
+        const query = new google.visualization.Query(
+          `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?sheet=Sheet1`
+        );
+
+        query.send(function (response) {
+          if (response.isError()) {
+            document.getElementById(
+              "resourceTableBody"
+            ).innerHTML = `<tr><td colspan="4" class="py-4 px-4 text-center text-red-600">Error loading resources: ${response.getMessage()}</td></tr>`;
+            return;
+          }
+
+          const data = response.getDataTable();
+          allResources = [];
+
+          for (let i = 0; i < data.getNumberOfRows(); i++) {
+            allResources.push({
+              title: data.getValue(i, 0) || "N/A",
+              author: data.getValue(i, 1) || "N/A",
+              subject: data.getValue(i, 2) || "N/A",
+              edition: data.getValue(i, 3) || "N/A",
+            });
+          }
+
+          renderResources(allResources);
+        });
+      }
+
+      function filterResources() {
+        const searchTerm = document
+          .getElementById("searchFilter")
+          .value.toLowerCase();
+        const filteredResources = allResources.filter(
+          (resource) =>
+            resource.title.toLowerCase().includes(searchTerm) ||
+            resource.author.toLowerCase().includes(searchTerm) ||
+            resource.subject.toLowerCase().includes(searchTerm)
+        );
+        renderResources(filteredResources);
+      }
+
+      function renderResources(resources) {
+        const tbody = document.getElementById("resourceTableBody");
+        let html = "";
+
+        if (resources.length === 0) {
+          html =
+            '<tr><td colspan="4" class="py-4 px-4 text-center text-gray-500">No resources found</td></tr>';
+        } else {
+          resources.forEach((resource) => {
+            html += `
+                        <tr class="hover:bg-gray-100 transition-colors">
+                            <td class="py-3 px-4">${resource.title}</td>
+                            <td class="py-3 px-4">${resource.author}</td>
+                            <td class="py-3 px-4">${resource.subject}</td>
+                            <td class="py-3 px-4">${resource.edition}</td>
+                        </tr>
+                    `;
+          });
+        }
+
+        tbody.innerHTML = html;
+      }
+    </script>
+    <script src="../script.js"></script>
+  </body>
+</html>

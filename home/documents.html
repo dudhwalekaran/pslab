@@ -1,0 +1,360 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .sidebar-hidden { transform: translateX(-100%); }
+        .sidebar-overlay { transition: opacity 0.3s ease-in-out; }
+        .sidebar-overlay-hidden { opacity: 0; pointer-events: none; }
+        .truncate-2-lines {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
+        .modal { transition: opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Left Section: Sidebar Toggle (Desktop) and Mobile Menu Button -->
+            <div class="flex items-center space-x-4">
+                <!-- Sidebar Toggle Button (Desktop Only) -->
+                <button id="sidebar-toggle" class="text-white text-2xl focus:outline-none hidden md:block">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Mobile Menu Button (Mobile Only) -->
+                <button
+                    id="mobile-menu-btn"
+                    class="md:hidden text-white focus:outline-none"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                >
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <!-- Title -->
+                <h1 class="text-xl font-bold tracking-tight">
+                    IITB Power System Lab
+                </h1>
+            </div>
+
+            <!-- Navigation Links (Desktop Only) -->
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="dashboard.html" class="hover:text-gray-300 transition-colors duration-300">Home</a></li>
+                <li><a href="reserved-equips.html" class="hover:text-gray-300 transition-colors duration-300">Equipment</a></li>
+                <li><a href="lab-resources.html" class="hover:text-gray-300 transition-colors duration-300">Lab Resources</a></li>
+                <li><a href="documents.html" class="hover:text-gray-300 transition-colors duration-300">Documents</a></li>
+            </ul>
+
+            <!-- IITB Logo -->
+            <div class="transform hover:scale-105 transition-transform duration-300">
+                <img src="../public/iitb.png" alt="IITB Logo" class="h-12" />
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+            <ul class="flex flex-col space-y-4 p-4">
+                <li><a href="dashboard.html" class="block py-2">Home</a></li>
+                <li><a href="reserved-equips.html" class="block py-2">Equipment</a></li>
+                <li><a href="lab-resources.html" class="block py-2">Lab Resources</a></li>
+                <li><a href="documents.html" class="block py-2">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 sidebar-overlay sidebar-overlay-hidden md:block hidden">
+        <div id="sidebar" class="w-52 bg-gray-900 text-white fixed top-0 left-0 h-full p-6 sidebar sidebar-hidden md:block hidden">
+            <div class="flex justify-end">
+                <button id="sidebar-close" class="text-white text-3xl focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-4 mt-6">
+                <a href="meeting.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-video mr-2"></i> Jitsi Meeting
+                </a>
+                <a href="upmath.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-square-root-alt mr-2"></i> Upmath
+                </a>
+                <a href="excalidraw.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-draw-polygon mr-2"></i> Excalidraw
+                </a>
+                <a href="login-request.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-user-plus mr-2"></i> Login Requests
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <section class="py-16 bg-gradient-to-b from-gray-100 to-gray-200">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center">Research Documents</h1>
+                    <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                        <button id="toggle-view" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center w-full sm:w-auto justify-center">
+                            <i class="fas fa-th-large mr-2"></i> Toggle View
+                        </button>
+                        <div class="relative w-full max-w-md">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                <i class="fas fa-search text-gray-500"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="search-input"
+                                placeholder="Search documents..."
+                                class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loading" class="flex justify-center items-center h-64">
+                    <i class="fas fa-spinner text-4xl text-blue-500 animate-spin"></i>
+                </div>
+
+                <!-- List View -->
+                <div id="list-view" class="space-y-4 hidden">
+                    <!-- Documents appended here -->
+                </div>
+
+                <!-- Preview Grid View -->
+                <div id="grid-view" class="masonry-grid">
+                    <!-- Documents appended here -->
+                </div>
+
+                <p id="no-results" class="text-center text-gray-500 py-12 hidden">No documents available.</p>
+            </div>
+        </section>
+
+        <!-- Preview Modal -->
+        <div id="preview-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden modal z-50">
+            <div class="bg-white rounded-lg w-11/12 max-w-4xl h-5/6 flex flex-col">
+                <div class="flex justify-between items-center p-4 border-b">
+                    <h2 id="modal-title" class="text-xl font-semibold text-gray-800"></h2>
+                    <button id="close-modal" class="text-gray-600 hover:text-gray-800">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <div class="flex-grow relative">
+                    <iframe id="modal-iframe" class="w-full h-full absolute inset-0" frameborder="0" scrolling="yes"></iframe>
+                </div>
+                <div class="p-4 border-t">
+                    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                        <i class="fas fa-download mr-2"></i> View Full Document
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('sidebar-hidden');
+            sidebarOverlay.classList.toggle('sidebar-overlay-hidden');
+        }
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        sidebarClose.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        window.addEventListener('scroll', () => {
+            sidebar.classList.add('sidebar-hidden');
+            sidebarOverlay.classList.add('sidebar-overlay-hidden');
+        });
+
+        // Document Fetching and Display
+        const listView = document.getElementById('list-view');
+        const gridView = document.getElementById('grid-view');
+        const loading = document.getElementById('loading');
+        const noResults = document.getElementById('no-results');
+        const searchInput = document.getElementById('search-input');
+        const toggleViewBtn = document.getElementById('toggle-view');
+        const previewModal = document.getElementById('preview-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalIframe = document.getElementById('modal-iframe');
+        const modalLink = document.getElementById('modal-link');
+        const closeModal = document.getElementById('close-modal');
+        let allFiles = [];
+        let isGridView = true;
+
+        async function fetchDocuments() {
+            loading.classList.remove('hidden');
+            try {
+                const res = await fetch(
+                    'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHKrpIkPfCrQlZtoApUqMk7ZzTB6xtsZfHYaDbJZ9X-HQb01hwB8uMPHn7VpCvTN-vLd775pPGfvZ7/pub?output=csv'
+                );
+                const csvText = await res.text();
+                const rows = csvText.split('\n').map(row => row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
+
+                const fileLinks = rows.slice(1).map(row => ({
+                    name: row[2]?.replace(/['"]+/g, '').trim(),
+                    link: row[1]?.replace(/['"]+/g, '').trim()
+                })).filter(file => file.name && file.link);
+
+                allFiles = fileLinks;
+                displayDocuments(allFiles);
+            } catch (error) {
+                console.error('Error fetching files:', error);
+                noResults.textContent = 'Failed to load documents.';
+                noResults.classList.remove('hidden');
+            } finally {
+                loading.classList.add('hidden');
+            }
+        }
+
+        function convertToNewFormat(oldLink) {
+            if (oldLink.includes('drive.google.com/open?id=')) {
+                const fileId = oldLink.split('id=')[1];
+                return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
+            }
+            return oldLink;
+        }
+
+        function generatePreview(fileLink) {
+            const newLink = convertToNewFormat(fileLink);
+            const fileIdMatch = newLink.match(/file\/d\/([^/]+)\//);
+            return fileIdMatch ? `https://drive.google.com/file/d/${fileIdMatch[1]}/preview` : null;
+        }
+
+        function displayDocuments(files) {
+            listView.innerHTML = '';
+            gridView.innerHTML = '';
+            if (files.length === 0) {
+                noResults.textContent = searchInput.value ? 'No matching documents found.' : 'No documents available.';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            files.forEach(file => {
+                const previewLink = generatePreview(file.link);
+                const viewLink = convertToNewFormat(file.link);
+
+                // List View
+                const listItem = document.createElement('div');
+                listItem.className = 'bg-white rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center justify-between hover:bg-gray-50 transition-all duration-300';
+                listItem.innerHTML = `
+                    <div class="flex items-center gap-4 w-full sm:w-auto">
+                        <i class="fas fa-file-pdf text-3xl text-red-500"></i>
+                        <div class="flex-1">
+                            <h2 class="text-lg font-semibold text-gray-800 truncate-2-lines">${file.name}</h2>
+                            <button class="text-blue-600 hover:underline text-sm preview-btn" data-preview="${previewLink}" data-name="${file.name}" data-link="${viewLink}">Preview</button>
+                        </div>
+                    </div>
+                    <a href="${viewLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 mt-4 sm:mt-0 w-full sm:w-auto justify-center">
+                        <i class="fas fa-download mr-2"></i> View
+                    </a>
+                `;
+                listView.appendChild(listItem);
+
+                // Grid View (Masonry)
+                const gridItem = document.createElement('div');
+                gridItem.className = 'masonry-item bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl';
+                gridItem.innerHTML = `
+                    ${previewLink ? `
+                        <div class="relative aspect-[4/3] bg-gray-100">
+                            <iframe src="${previewLink}" class="w-full h-full absolute inset-0" frameborder="0" scrolling="no" title="${file.name}"></iframe>
+                        </div>
+                    ` : ''}
+                    <div class="p-4">
+                        <h2 class="text-md font-semibold text-gray-800 truncate-2-lines mb-2">${file.name}</h2>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-2">
+                            <button class="text-blue-600 hover:underline text-sm preview-btn w-full sm:w-auto text-center" data-preview="${previewLink}" data-name="${file.name}" data-link="${viewLink}">Preview</button>
+                            <a href="${viewLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 w-full sm:w-auto justify-center">
+                                <i class="fas fa-download mr-1"></i> View
+                            </a>
+                        </div>
+                    </div>
+                `;
+                gridView.appendChild(gridItem);
+            });
+
+            toggleView();
+        }
+
+        function toggleView() {
+            if (isGridView) {
+                gridView.classList.remove('hidden');
+                listView.classList.add('hidden');
+                toggleViewBtn.innerHTML = '<i class="fas fa-list mr-2"></i> List View';
+            } else {
+                listView.classList.remove('hidden');
+                gridView.classList.add('hidden');
+                toggleViewBtn.innerHTML = '<i class="fas fa-th-large mr-2"></i> Grid View';
+            }
+        }
+
+        toggleViewBtn.addEventListener('click', () => {
+            isGridView = !isGridView;
+            toggleView();
+        });
+
+        // Preview Modal
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('preview-btn')) {
+                const previewLink = e.target.dataset.preview;
+                const name = e.target.dataset.name;
+                const viewLink = e.target.dataset.link;
+
+                if (previewLink) {
+                    modalTitle.textContent = name;
+                    modalIframe.src = previewLink;
+                    modalLink.href = viewLink;
+                    previewModal.classList.remove('hidden');
+                }
+            }
+        });
+
+        closeModal.addEventListener('click', () => previewModal.classList.add('hidden'));
+        previewModal.addEventListener('click', (e) => {
+            if (e.target === previewModal) previewModal.classList.add('hidden');
+        });
+
+        // Search Functionality
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredFiles = allFiles.filter(file => file.name.toLowerCase().includes(searchTerm));
+            displayDocuments(filteredFiles);
+        });
+
+        // Fetch documents on load
+        document.addEventListener('DOMContentLoaded', fetchDocuments);
+
+        // Debug log to confirm loading
+        console.log("Loading documents.html - No redirects should occur.");
+    </script>
+</body>
+</html>

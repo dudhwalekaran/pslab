@@ -1,0 +1,302 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../login.html");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Resources - IITB Power System Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .sidebar-hidden { transform: translateX(-100%); }
+        .sidebar-overlay { transition: opacity 0.3s ease-in-out; }
+        .sidebar-overlay-hidden { opacity: 0; pointer-events: none; }
+        .message { animation: fadeInOut 2s ease-in-out; }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Left Section: Sidebar Toggle (Desktop) and Mobile Menu Button -->
+            <div class="flex items-center space-x-4">
+                <!-- Sidebar Toggle Button (Desktop Only) -->
+                <button id="sidebar-toggle" class="text-white text-2xl focus:outline-none hidden md:block">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Mobile Menu Button (Mobile Only) -->
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <!-- Title -->
+                <h1 class="text-xl font-bold tracking-tight">IITB Power System Lab</h1>
+            </div>
+
+            <!-- Navigation Links (Desktop Only) -->
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="dashboard.html" class="hover:text-gray-300 transition-colors duration-300">Home</a></li>
+                <li><a href="equipments.html" class="hover:text-gray-300 transition-colors duration-300">Equipment</a></li>
+                <li><a href="lab-resources.html" class="hover:text-gray-300 transition-colors duration-300">Lab Resources</a></li>
+                <li><a href="documents.html" class="hover:text-gray-300 transition-colors duration-300">Documents</a></li>
+            </ul>
+
+            <!-- IITB Logo -->
+            <div class="transform hover:scale-105 transition-transform duration-300">
+                <img src="../public/iitb.png" alt="IITB Logo" class="h-12" />
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-indigo-800 text-white">
+            <ul class="flex flex-col space-y-4 p-4">
+                <li><a href="dashboard.html" class="block py-2">Home</a></li>
+                <li><a href="equipments.html" class="block py-2">Equipment</a></li>
+                <li><a href="lab-resources.html" class="block py-2">Lab Resources</a></li>
+                <li><a href="documents.html" class="block py-2">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 sidebar-overlay sidebar-overlay-hidden md:block hidden">
+        <div id="sidebar" class="w-52 bg-gray-900 text-white fixed top-0 left-0 h-full p-6 sidebar sidebar-hidden md:block hidden">
+            <div class="flex justify-end">
+                <button id="sidebar-close" class="text-white text-3xl focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-4 mt-6">
+                <a href="meeting.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-video mr-2"></i> Jitsi Meeting
+                </a>
+                <a href="upmath.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-square-root-alt mr-2"></i> Upmath
+                </a>
+                <a href="excalidraw.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-draw-polygon mr-2"></i> Excalidraw
+                </a>
+                <a href="login-request.html" class="text-white text-lg hover:text-indigo-400 transition-colors duration-300 flex items-center">
+                    <i class="fas fa-user-plus mr-2"></i> Login Requests
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <section class="py-16 bg-gray-100">
+            <div class="max-w-screen-xl mx-auto px-6 space-y-12">
+                <!-- Hero Section -->
+                <div class="text-center space-y-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Welcome to the Lab Resource Portal</h2>
+                    <p class="text-lg text-gray-600">Explore our library, tools, and QR codes to access everything you need with ease.</p>
+                </div>
+
+                <!-- Resource Links Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- PDF Library Card -->
+                    <a href="https://www.ee.iitb.ac.in/course/~emlab/assets/lab_Library.pdf" target="_blank" class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        <div class="flex items-center p-6 space-x-4 hover:bg-blue-50 transition-all duration-300">
+                            <i class="fas fa-file-pdf text-4xl text-red-500"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-700">Library PDF</h3>
+                                <p class="text-gray-500">Access the entire library of books in PDF format.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Excel Books Card -->
+                    <a href="https://docs.google.com/spreadsheets/d/1JE8dekFtl8nRf9ugVjGcmOwo72homOud6lJizzsX0ZQ/edit?usp=sharing" target="_blank" class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        <div class="flex items-center p-6 space-x-4 hover:bg-blue-50 transition-all duration-300">
+                            <i class="fas fa-file-excel text-4xl text-green-500"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-700">Excel Book Sheet</h3>
+                                <p class="text-gray-500">Access a complete list of books in our library with detailed information.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Excel Machines Card -->
+                    <a href="https://docs.google.com/spreadsheets/d/1gr_0wAU0B0AuCWHfeRY5eE5LcFH3lv6LUXFE3sRdZPE/edit?usp=sharing" target="_blank" class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        <div class="flex items-center p-6 space-x-4 hover:bg-blue-50 transition-all duration-300">
+                            <i class="fas fa-file-excel text-4xl text-green-500"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-700">Excel Machine Sheet</h3>
+                                <p class="text-gray-500">View records of machines available in the lab.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- QR Code Section -->
+                <div class="text-center space-y-6">
+                    <h3 class="text-3xl font-semibold text-gray-800">Scan the QR Codes</h3>
+                    <p class="text-lg text-gray-600">Use the QR codes below to quickly access books or machines.</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-12">
+                        <!-- QR Book Card -->
+                        <div class="flex flex-col items-center bg-white rounded-lg shadow-md p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                            <img src="../public/images/bookqr.png" alt="QR Code for Book" class="w-40 h-40 mb-4 transition-all duration-300 transform hover:scale-110">
+                            <p class="text-lg font-semibold text-gray-700">Get Book</p>
+                        </div>
+                        <!-- QR Machine Card -->
+                        <div class="flex flex-col items-center bg-white rounded-lg shadow-md p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                            <img src="../public/images/machineqr.png" alt="QR Code for Machine" class="w-40 h-40 mb-4 transition-all duration-300 transform hover:scale-110">
+                            <p class="text-lg font-semibold text-gray-700">Get Machine</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal for Adding a New Book -->
+        <div id="add-book-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-md">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">Add a New Book</h2>
+                <form id="add-book-form" class="space-y-4">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                            <i class="fas fa-book text-indigo-600"></i>
+                        </span>
+                        <input type="text" name="title" placeholder="Title" class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                            <i class="fas fa-user text-indigo-600"></i>
+                        </span>
+                        <input type="text" name="author" placeholder="Author" class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                            <i class="fas fa-tag text-indigo-600"></i>
+                        </span>
+                        <input type="text" name="subject" placeholder="Subject" class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                            <i class="fas fa-book-open text-indigo-600"></i>
+                        </span>
+                        <input type="text" name="edition" placeholder="Edition" class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                            <i class="fas fa-copy text-indigo-600"></i>
+                        </span>
+                        <input type="number" name="copies" placeholder="Copies" min="0" class="w-full pl-12 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
+                        <button type="submit" id="submit-book-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300 w-full sm:w-auto">Add</button>
+                        <button type="button" id="cancel-book-btn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition-colors duration-300 w-full sm:w-auto">Cancel</button>
+                    </div>
+                    <p id="modal-error" class="text-red-500 text-center mt-2 hidden"></p>
+                    <p id="modal-success" class="text-green-500 text-center mt-2 hidden message"></p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        // Sidebar Toggle
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('sidebar-hidden');
+            sidebarOverlay.classList.toggle('sidebar-overlay-hidden');
+        }
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        sidebarClose.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        window.addEventListener('scroll', () => {
+            sidebar.classList.add('sidebar-hidden');
+            sidebarOverlay.classList.add('sidebar-overlay-hidden');
+        });
+
+        // Modal Handling
+        const addBookBtn = document.getElementById('add-book-btn');
+        const modal = document.getElementById('add-book-modal');
+        const cancelBtn = document.getElementById('cancel-book-btn');
+        const addBookForm = document.getElementById('add-book-form');
+        const submitBookBtn = document.getElementById('submit-book-btn');
+        const modalError = document.getElementById('modal-error');
+        const modalSuccess = document.getElementById('modal-success');
+
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+
+        addBookBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+        cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+        addBookForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            modalError.classList.add('hidden');
+            modalSuccess.classList.add('hidden');
+            modalError.textContent = '';
+            modalSuccess.textContent = 'Book added successfully!';
+
+            const formData = new FormData(addBookForm);
+            const bookData = {
+                title: formData.get('title').trim(),
+                author: formData.get('author').trim(),
+                subject: formData.get('subject').trim(),
+                edition: formData.get('edition').trim(),
+                copies: parseInt(formData.get('copies'), 10),
+                timestamp: new Date().toISOString()
+            };
+
+            if (!bookData.title || !bookData.author || !bookData.subject || !bookData.edition || isNaN(bookData.copies)) {
+                modalError.textContent = 'Please fill in all fields correctly.';
+                modalError.classList.remove('hidden');
+                return;
+            }
+
+            submitBookBtn.textContent = 'Adding...';
+            submitBookBtn.disabled = true;
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bookData)
+                });
+
+                modalSuccess.classList.remove('hidden');
+                setTimeout(() => {
+                    modalSuccess.classList.add('hidden');
+                    modal.classList.add('hidden');
+                    addBookForm.reset();
+                }, 2000);
+            } catch (err) {
+                modalError.textContent = 'Failed to add book. Try again.';
+                modalError.classList.remove('hidden');
+                console.error('Error:', err);
+            }
+
+            submitBookBtn.textContent = 'Add';
+            submitBookBtn.disabled = false;
+        });
+
+        // Debug log to confirm loading
+        console.log("Loading lab-resources.html - No redirects should occur.");
+    </script>
+</body>
+</html>
